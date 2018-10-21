@@ -1,0 +1,82 @@
+<div class="nav-md">
+  <div class="container body">
+    <div class="main_container">
+      <!-- sidebar menu -->
+    <app-menudashboard></app-menudashboard>
+    <!-- menu sidebarclosed -->
+    <!-- top navigation -->
+    <app-header></app-header>
+  <!-- /top navigation -->
+  <div class="right_col" role="main">
+    <div class="mainwrap">
+      <div class="allapp">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>Application History For : {{appTitle}}</h2> 
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <div class="table-responsive pagination-data">
+                <table class="table table-bordered table-striped projects">
+                  <thead>
+                    <tr>
+                      <!-- <th>Request Type</th> -->
+                      <th>Date</th>
+                      <th>Request Details</th>                      
+                      <!-- <th>Updated Fields</th> -->
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let data of dataList">
+                      <!-- <td *ngIf="data.updateType=='NEW' || data.updateType=='UPDATED_VERSION' ">{{data.updateType | titlecase}} APPLICATION</td>
+                      <td *ngIf="!data.updateType">DETAILS UPDATED</td> -->
+                      <td width="20%">{{data.updatedAt | date: 'medium'}}</td>
+                      <td *ngIf="data.updateType=='NEW'"><b>{{appTitle}}</b> BVK has been uploaded</td>
+                      <td *ngIf="data.updateType=='UPDATED_VERSION'">New version for <b>{{appTitle}} {{data.versionName}}</b> has been updated</td>
+                      <td *ngIf="!data.updateType">
+                      	<span *ngFor="let value of data.updatedFeilds"> <b>{{value+ ' '}}</b> </span> updated for <b>{{appTitle}} {{data.versionName}}</b> version
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                 <p class="no-result-found" *ngIf="show==false">{{constants.NO_RECORD_FOUND}}</p>
+                  <ul *ngIf="pager.pages && pager.pages.length && show==true" class="pagination">
+                  <li *ngIf="pager.currentPage != 1" [ngClass]="{disabled:pager.currentPage === 1}">
+                      <a (click)="getAudiTrail(1)">First</a>
+                  </li>
+                  <li *ngIf="pager.currentPage === 1" [ngClass]="{disabled:pager.currentPage === 1}">
+                      <a>First</a>
+                  </li>
+                  <li *ngIf="pager.currentPage != 1" [ngClass]="{disabled:pager.currentPage === 1}">
+                      <a (click)="getAudiTrail(pager.currentPage - 1)">Previous</a>
+                  </li>
+                  <li *ngIf="pager.currentPage === 1" [ngClass]="{disabled:pager.currentPage === 1}">
+                      <a>Previous</a>
+                  </li>
+                  <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                      <a (click)="getAudiTrail(page)">{{page}}</a>
+                  </li>
+                  <li *ngIf="pager.currentPage != pager.totalPages" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                      <a (click)="getAudiTrail(pager.currentPage + 1)">Next</a>
+                  </li>
+                  <li *ngIf="pager.currentPage === pager.totalPages" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                      <a>Next</a>
+                  </li>
+                  <li *ngIf="pager.currentPage != pager.totalPages" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                      <a (click)="getAudiTrail(pager.totalPages)">Last</a>
+                  </li>
+                  <li *ngIf="pager.currentPage === pager.totalPages" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                      <a>Last</a>
+                  </li>
+              </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>

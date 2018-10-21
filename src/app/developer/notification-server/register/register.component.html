@@ -1,0 +1,94 @@
+<div class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <!-- menu sidebar -->
+      <app-menudashboard></app-menudashboard>
+       <!-- menu sidebarclosed -->        
+
+        <!-- top navigation -->
+        <app-header></app-header>
+        <!-- /top navigation -->
+
+          <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="mainwrap">
+            <div class="allapp">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Application Registration for Addon Service</h2>                    
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content"><br>
+                    
+                    <form (ngSubmit) = "AppRegistrationForAppStore()" #RegistrationForm = "ngForm" id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate>                     
+                      <div class="form-group" [ngClass]="{'has-error':!complexForm.controls['packageName'].valid && complexForm.controls['packageName'].touched}">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Package Name:<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" [(ngModel)]="notificationModel.packageName" name="packageName" class="form-control col-md-7 col-xs-12" placeholder="Package Name(com.packageName.com)" [formControl]="complexForm.controls['packageName']" pattern="^\w+([a-z.A-Z1-9])+$">
+                          <div *ngIf="complexForm.controls['packageName'].hasError('pattern') && complexForm.controls['packageName'].touched">{{constants.PACK_NAME_PATTERN}}</div>
+                          <div *ngIf="complexForm.controls['packageName'].hasError('required') && complexForm.controls['packageName'].touched">{{constants.PACKAGE_NAME_REQUIRED}}</div>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Service Name:<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                           <select name="serviceId" class="form-control col-md-7 col-xs-12" [(ngModel)]="notificationModel.serviceId" [formControl]="complexForm.controls['serviceId']">
+                              <option [value]="1" [selected]="1">Notification Service</option>
+                          </select>
+                        </div>
+                      </div>
+                      
+                      <div class="form-group" [ngClass]="{'has-error':!complexForm.controls['description'].valid && complexForm.controls['description'].touched}">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Description:<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <textarea class="form-control" rows="6" [(ngModel)]="notificationModel.description" name="description" placeholder="Reason to register for service" [formControl]="complexForm.controls['description']" pattern="^[a-zA-Z1-9].*"></textarea>                        
+                         <div *ngIf="complexForm.controls['description'].hasError('required') && complexForm.controls['description'].touched">{{constants.DESCRIPTION_REQUIRED}}</div>
+                        </div>
+                      </div>
+                      
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Web Server Key:
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" [(ngModel)]="notificationModel.webServerKey" name="webServerKey" class="form-control col-md-7 col-xs-12" placeholder="Web Server Key" [formControl]="complexForm.controls['webServerKey']" 
+                          [readonly]="true">
+                        </div>
+                      </div>
+                      
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Application Key:
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" [(ngModel)]="notificationModel.applicationKey" name="applicationKey" class="form-control col-md-7 col-xs-12" placeholder="Application Key" [formControl]="complexForm.controls['applicationKey']"
+                          [readonly]="true">
+                        </div>
+                      </div>                                                                
+                      
+                     <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <button routerLink="/addon-services" class="btn btn-default" type="button">Cancel</button>
+                          <input type="submit" class="btn btn-success" value="Submit" [disabled]="!complexForm.valid">                           
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>                                
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+        
+        <!-- footer content -->
+        <app-footer></app-footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+</div>

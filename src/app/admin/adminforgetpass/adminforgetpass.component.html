@@ -1,0 +1,35 @@
+<div class="container-fluid">
+    <div class="row">
+        <span class="shadow visible-lg visible-md">Admin console</span>
+        <div class="col-md-8 col-sm-8 loginGraphic visible-lg visible-md">
+            <img src="assets/images/device.png" class="img-responsive device">
+            <div class="firstHalf"><!--/GEAR IMAGE/-->
+            <div class="shadow-heading visible-lg visible-md">
+                <span class="text">Admin console</span>
+            </div>
+        </div>
+        <div class="secondHalf"><!--/BOTTOM RIGHT GRAPH/--></div>
+    </div>
+    <div class="col-md-4 col-sm-4 loginWrap">
+        <div class="loginForm">
+            <form [formGroup]="complexForm" (ngSubmit)="forgotPassword()" #forgotPasswordForm="ngForm" >
+                <div class="logo"><img src="assets/images/BitVault-developer-console-icon.png" class="img-responsive"></div>
+                <div class="formContent">
+                    <div class="title">BitVault &nbsp; AppStore</div>
+                    <div class="pd20">
+                        <div class="form-group" [ngClass]="{'has-error':!complexForm.controls['email'].valid && complexForm.controls['email'].touched}">
+                            <input type="email" placeholder="Email" name="email" [(ngModel)]="user.email" [formControl]="complexForm.controls['email']" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" autofocus>
+                            <div *ngIf="complexForm.controls['email'].hasError('pattern') && complexForm.controls['email'].touched" class="alert alert-danger">Email is invalid</div>
+                            <div *ngIf="complexForm.controls['email'].hasError('required') && complexForm.controls['email'].touched" class="alert alert-danger">Email is required</div>
+                        </div>
+                        <div class="loginBtnBack">
+                            <input type="submit" value="Submit" name="submit" [disabled]="!complexForm.valid">
+                        </div>
+                        <a routerLink="/adminlogin" class="forPass">Click here to login</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>

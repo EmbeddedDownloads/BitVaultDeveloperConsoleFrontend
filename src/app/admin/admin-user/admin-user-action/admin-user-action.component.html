@@ -1,0 +1,151 @@
+<div class="nav-md">
+  <div class="container body">
+    <div class="main_container">
+      <!-- sidebar menu -->
+    <app-adminmenudashboard></app-adminmenudashboard>
+    <!-- /sidebar menu -->
+    <!-- top navigation -->
+  <app-adminheader></app-adminheader>
+  <!-- /top navigation -->
+  <div class="right_col" role="main">
+    <div class="mainwrap">
+      <div class="allapp">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>Manage account: {{model.username}}</h2>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <br>
+              <form #addUserDetails = "ngForm" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+                <div class="orgName" *ngIf="model.signupAs == 'Organization'">
+                  <div class="form-group">
+                    <strong class="control-label col-md-3 col-sm-3 col-xs-12">Organization Name:</strong>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" [(ngModel)]="model.orgName" name="orgName" class="form-control col-md-7 col-xs-12" readonly>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <strong class="control-label col-md-3 col-sm-3 col-xs-12">Organization Email ID:
+                    </strong>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" [(ngModel)]="model.accEmail" name="accEmail" class="form-control col-md-7 col-xs-12" readonly>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <strong class="control-label col-md-3 col-sm-3 col-xs-12">Organization Developer(s) #:
+                    </strong>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" [(ngModel)]="model.childCount" name="childCount" class="form-control col-md-7 col-xs-12" readonly>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <strong class="control-label col-md-3 col-sm-3 col-xs-12">Organization Website:
+                    </strong>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" [(ngModel)]="model.website" name="website" class="form-control col-md-7 col-xs-12" readonly>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <strong class="control-label col-md-3 col-sm-3 col-xs-12">User Name:</strong>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" [(ngModel)]="model.username" name="username" class="form-control col-md-7 col-xs-12" readonly>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <strong class="control-label col-md-3 col-sm-3 col-xs-12">Email ID:
+                  </strong>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" [(ngModel)]="model.email" name="email" class="form-control col-md-7 col-xs-12" readonly>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <strong class="control-label col-md-3 col-sm-3 col-xs-12">Account Type:
+                  </strong>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" [(ngModel)]="model.signupAs" name="price" class="form-control col-md-7 col-xs-12" readonly>
+                  </div>
+                  <a *ngIf="model.signupAs == 'Organization Developer'" (click)="orgDetail(model.parentId)">Click for organization details</a>
+                </div>
+              <div class="orgDev" *ngIf="model.signupAs != 'Organization Developer'">
+                  <div class="form-group">
+                    <strong class="control-label col-md-3 col-sm-3 col-xs-12">Price Paid(USD):
+                    </strong>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" [(ngModel)]="model.payment" name="payment" class="form-control col-md-7 col-xs-12" readonly>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <strong class="control-label col-md-3 col-sm-3 col-xs-12">Signup Reason:
+                    </strong>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" [(ngModel)]="model.signupReason" name="childuser" class="form-control col-md-7 col-xs-12" readonly>
+                    </div>
+                  </div>
+              </div>
+                <div class="form-group">
+                  <strong class="control-label col-md-3 col-sm-3 col-xs-12">Role:
+                  </strong>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" [(ngModel)]="model.role" name="reason" class="form-control col-md-7 col-xs-12" readonly>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <strong class="control-label col-md-3 col-sm-3 col-xs-12">Change Status To:
+                  </strong>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <select [(ngModel)]="model.status" name="status"  class="form-control col-md-7 col-xs-12" (change)="changedValue(model.status)">
+                      <option value="PENDING" *ngIf="model.status == 'PENDING'">PENDING</option>
+                      <option *ngIf="model.status != 'NOT' && model.txnStatus =='SUCCESS'" value="ACTIVE">Active</option>
+
+                      <option *ngIf="model.txnStatus !='SUCCESS'" value="NOT">Payment Due</option>
+                      <option value="INACTIVE">Inactive</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group" [formGroup]="complexForm" *ngIf = "model.status == 'INACTIVE'">
+                  <strong class="control-label col-md-3 col-sm-3 col-xs-12">Rejection Reason Template:
+                  </strong>
+                  
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <select [(ngModel)]="model.temp_status" [formControl]="complexForm.controls['temp_status']"  class="form-control col-md-7 col-xs-12" name="temp_status">
+                      <option value="undefined" [selected]="model.temp_status === 'undefined'" >--Select Reason--</option>
+                      <option *ngFor="let temp of rejectionTemplte" [ngValue]="temp.key" >{{temp.value}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group" *ngIf = "model.temp_status == 'others' && model.status == 'INACTIVE'">
+                  <strong class="control-label col-md-3 col-sm-3 col-xs-12">Rejection Reason Others:
+                  </strong>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" [(ngModel)]="model.rejectionReason" name="rejectionReason" class="form-control col-md-7 col-xs-12" required>
+                  </div>
+                </div>
+                <p style="color: red;" *ngIf="model.status=='INACTIVE' && model.txnStatus !='SUCCESS'"><strong style="font-size: 16px;">Note*:</strong> It will suspend/Inactivate this account: The user even restricted to make account fee.</p>
+
+                <p style="color: green;" *ngIf="model.status=='NOT' && model.txnStatus !='SUCCESS'"><strong style="font-size: 16px;">Note*:</strong> It will enable the user to make payment.</p>
+
+                <p style="color: green;" *ngIf="model.status =='ACTIVE' && model.txnStatus =='SUCCESS'"><strong style="font-size: 16px;">Note*:</strong> User have full access to his account.</p>
+
+                <p style="color: red;" *ngIf="model.status =='INACTIVE' && model.txnStatus =='SUCCESS'"><strong style="font-size: 16px;">Note*:</strong> Suspend/Inactivate this account, User won't be able to login.</p>
+
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                    <input [disabled]="!complexForm.valid" (click)="accAprovalRejection(model.userId, model.status, model.rejectionReason)" type="submit" value="Submit" class="btn btn-success">
+                    <button (click)="backClicked()" type="submit" class="btn btn-default">Cancel</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>

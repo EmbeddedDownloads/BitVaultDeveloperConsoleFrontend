@@ -1,0 +1,36 @@
+<div class="back">
+    <div class="container-fluid">
+        <div class="row">
+           <span class="shadow visible-lg visible-md">developer console</span>
+            <div class="col-md-7 col-sm-7 loginGraphic visible-lg visible-md">
+                <img src="assets/images/device.png" class="img-responsive device">
+                <div class="firstHalf"><!--/GEAR IMAGE/-->                    
+                    <div class="shadow-heading visible-lg visible-md">
+                        <span class="text">developer console</span>                       
+                    </div>                  
+                </div>
+                <div class="secondHalf"><!--/BOTTOM RIGHT GRAPH/--></div>                
+            </div>
+            <div class="col-md-5 col-sm-5 loginWrap" *ngIf="msg==true">                
+                <div class="logo"><img src="assets/images/BitVault-developer-console-icon.png" class="img-responsive"></div>
+                <div class="paypal-payment-success-block">
+                    <h2 class="thanks-title">Thank You</h2>
+                    <h5>We will send you an Email for the confirmation receipt of Payment shortly.</h5>
+                    <div class="payment-status">                   
+                        <div class="check-block"><i class="fa fa-check-circle-o"></i></div>
+                        <h3>Payment Successfully Recieved!</h3>
+                        <h6>
+                            Your online payment has been authorized successfully. Below are the details of your transaction for your Reference.
+                        </h6>
+                        <div class="tra-detail">
+                            <p><strong>Transaction Amount: </strong> {{paymentStatus.payment}}$ </p>
+                            <p><strong>Transaction ID: </strong> {{paymentStatus.txnId}} </p>
+                            <p><strong>Transaction Date: </strong> {{paymentStatus.updatedAt | date:'longDate'}} </p>
+                        </div>
+                    </div>
+                    <a routerLink="/login" class="signupButton">Login</a> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>  

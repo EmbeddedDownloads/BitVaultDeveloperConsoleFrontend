@@ -1,0 +1,122 @@
+<div class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+		<!-- menu sidebar -->
+		<app-menudashboard></app-menudashboard>
+		<!-- menu sidebarclosed -->
+		<!-- top navigation -->
+	<app-header></app-header>
+	<!-- /top navigation -->
+	<!-- page content -->
+	<div class="right_col" role="main">
+		<div class="mainwrap">
+			<div class="allapp">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="x_panel">
+						<div class="x_title">
+							<h2>Manage Profile</h2>
+							<div class="clearfix"></div>
+						</div>
+						<div class="x_content">
+							<div class="custom-tab" role="tabpanel" data-example-id="togglable-tabs">
+								<ul class="nav custom-nav" role="tablist">
+									<li role="presentation" class="active"><a href="#profile" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Profile</a>
+									</li>
+									<li role="presentation" class=""><a href="#change_pass" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Update Password</a>
+									</li>
+								</ul>
+						<div class="tab-content">
+							<div role="tabpanel" class="tab-pane fade active in" id="profile" aria-labelledby="home-tab">
+								<div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+									<div class="profile_img">
+										<div class="crop-avatar">
+											<input type="file" name="" class="upload-file" (change)="uploadAvatar($event)" title="Select image to upload" accept=".png, .JPEG, .JPG, .gif">
+											<img *ngIf="!user.avatar" class="img-responsive avatar-view" src="assets/images/user.png" alt="" title="Change the avatar">
+											<img *ngIf="user.avatar" class="img-responsive avatar-view" src="{{user.avatar}}" alt="" title="Change the avatar">
+											<div *ngIf="user.avatar" class="rem-pro"><img class="img-responsive remove-pro" src="assets/images/remove-profile-pic.png" title="Remove Profile image" (click)="deleteAvatar()">
+										</div>
+										</div>
+									</div>
+									<h3>{{user.username}}</h3>
+									<ul class="list-unstyled user_data">
+										<li>{{user.email}}</li>
+									</ul>
+								</div>
+								<div class="col-md-9 col-sm-9 col-xs-12">
+									<form class="form-horizontal" [formGroup]="profileForm" (ngSubmit)="updateProfileDetails()" #userForm="ngForm" novalidate>
+										<div class="form-group" [ngClass]="{'has-error':!profileForm.controls['username'].valid && profileForm.controls['username'].touched}">
+											<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Profile Name <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 col-xs-12">
+												<input type="text" id="profile-name" class="form-control col-md-7 col-xs-12" [(ngModel)]="user.username" 
+												name="username" [formControl]="profileForm.controls['username']" placeholder="Profile Name" pattern="^\w+([a-z A-Z])+$">
+												<div *ngIf="profileForm.controls['username'].hasError('pattern') && profileForm.controls['username'].touched">{{constants.INVALID_PATTERN}}</div>
+												<div *ngIf="profileForm.controls['username'].hasError('required') && profileForm.controls['username'].touched">{{constants.USER_REQUIRED}}</div>
+                           						<div *ngIf="profileForm.controls['username'].hasError('maxlength') && profileForm.controls['username'].touched">{{constants.USER_MAX_LENGTH}}</div>
+											</div>
+										</div>
+										
+										<div class="ln_solid"></div>
+										<div class="form-group">
+											<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+											 	<input type="button" id="profile-form" class="btn btn-success"value="Submit" (click)="updateProfileDetails()" [disabled]="!profileForm.valid">
+											 	<button routerLink="/dashboard" class="btn btn-default" type="button">Cancel</button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+					<div role="tabpanel" class="tab-pane fade" id="change_pass" aria-labelledby="profile-tab">
+						<form [formGroup]="changePasswordForm" class="form-horizontal" (submit)="updatePassword()">
+							<div class="form-group" [ngClass]="{'has-error':!changePasswordForm.controls['oldPassword'].valid && changePasswordForm.controls['oldPassword'].touched}">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="oldPassword">Current Password<span class="required">*</span>
+								</label>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<input type="password" placeholder="Current Password" id="oldPassword"  class="form-control col-md-7 col-xs-12 parsley-success" data-parsley-id="5" [(ngModel)]="user.oldPassword" name="oldPassword" [formControl]="changePasswordForm.controls['oldPassword']">
+								</div>
+							</div>
+
+							<div class="form-group" [ngClass]="{'has-error':!changePasswordForm.controls['newPassword'].valid && changePasswordForm.controls['newPassword'].touched}">
+		
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="newPassword">New Password<span class="required">*</span>
+							</label>							
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="password" placeholder="New Password" autocomplete="new-password" id="newPassword" class="form-control col-md-7 col-xs-12 parsley-success" data-parsley-id="7" [(ngModel)]="user.newPassword" name="newPassword" [formControl]="changePasswordForm.controls['newPassword']">
+								<div *ngIf="changePasswordForm.controls['newPassword'].hasError('required') && changePasswordForm.controls['newPassword'].touched" class="alert alert-danger"></div>
+						        <div *ngIf="changePasswordForm.controls['newPassword'].hasError('minlength') && changePasswordForm.controls['newPassword'].touched">{{constants.PASSWORD_MIN_LENGTH}}</div>
+						        <div *ngIf="changePasswordForm.controls['newPassword'].hasError('maxlength') && changePasswordForm.controls['newPassword'].touched">{{constants.PASSWORD_MAX_LENGTH}}</div>
+							</div>
+						</div>
+
+						<div class="form-group" [ngClass]="{'has-error':!changePasswordForm.controls['confirmPassword'].valid && changePasswordForm.controls['confirmPassword'].touched}">
+							<label for="confirmPassword" class="control-label col-md-3 col-sm-3 col-xs-12">Confirm New Password<span class="required">*</span></label>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input id="confirmPassword" autocomplete="new-password" class="form-control col-md-7 col-xs-12" type="password" placeholder="Confirm Password" [(ngModel)]="user.confirmPassword" name="confirmPassword" [formControl]="changePasswordForm.controls['confirmPassword']" validateEqual="password">
+								<div *ngIf="changePasswordForm.controls.confirmPassword.touched && changePasswordForm.hasError('mismatchedPasswords')">{{constants.PASSWORD_MISMATCH}}</div>
+					            <div *ngIf="changePasswordForm.controls['confirmPassword'].hasError('required') && changePasswordForm.controls['confirmPassword'].touched" ></div>
+							</div>
+						</div>	
+					
+						<div class="ln_solid"></div>
+						<div class="form-group">
+							<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+							<input type="submit" [disabled]="!changePasswordForm.valid" value="Submit" class="btn btn-success">
+							</div>
+						</div>
+					</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="clearfix"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- footer content -->
+<app-footer></app-footer>
+<!-- /footer content -->
+</div>
+</div>
+</div>

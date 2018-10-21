@@ -1,0 +1,30 @@
+<div class="col-md-3 left_col" id="toggle_menu">
+  <div class="left_col scroll-view">
+    <div class="clearfix"></div>
+    <div class="profile clearfix">
+      <div class="profile_pic">
+        <img *ngIf="avatar && profileImage" src="{{profileImage}}" class="img-circle profile_img">
+        <img *ngIf="avatar && !profileImage" src="{{avatar}}" class="img-circle profile_img">
+      </div>
+      <div class="profile_info">
+        <span>Welcome,</span>
+        <h2 *ngIf="avatarName && profileName">{{profileName}}</h2>
+        <h2 *ngIf="avatarName && !profileName">{{avatarName}}</h2>
+      </div>
+    </div>
+    <br />
+    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+      <div class="menu_section">
+        <ul class="nav side-menu">
+          <li><a [routerLinkActive]="['active']" routerLink="/admindashboard">Dashboard</a></li>
+          <li><a [routerLinkActive]="['active']" routerLink="/admin-users-list">Users</a></li>
+          <li><a [routerLinkActive]="['active']" routerLink="/account-requests">Account Requests</a></li>
+          <li><a [routerLinkActive]="['active']" routerLink="/resource-requests">Organization User Requests</a></li>
+          <li><a [routerLinkActive]="['active']" routerLink='/admin-apps-list'>Applications</a></li>
+          <li><a [routerLinkActive]="['active']" routerLink="/application-requests">Application Requests</a></li>     
+          <li><a [routerLinkActive]="['active']" routerLink="/app-category">Categories</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,91 @@
+<div class="nav-md">
+  <div class="container body">
+    <div class="main_container">
+      <!-- sidebar menu -->
+    <app-menudashboard></app-menudashboard>
+    <!-- menu sidebarclosed -->
+    <!-- top navigation -->
+    <app-header></app-header>
+  <!-- /top navigation -->
+  <div class="right_col" role="main">
+    <div class="mainwrap">
+      <div class="allapp">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>Request History</h2> 
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <div class="table-responsive pagination-data">
+                <table class="table table-bordered table-striped projects">
+                  <thead>
+                    <tr>
+                      <th>Request Type</th>
+                      <th>Date</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="" *ngFor="let data of dataList.result | paginate : { itemsPerPage:10, currentPage:page, id : 1, totalItems:dataList.totalRecords }">
+                      <td>{{data.requestType.requestType | titlecase}}</td>
+                      <td>{{data.updatedAt | date: 'mediumDate'}}</td>
+                      <td class="project_progress">
+                        <span class="btn-success btn-xs capitalize">{{data.status}}</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="paginattion" *ngIf="show==true">
+                  <pagination-controls
+                    (pageChange) = "page = getDataList($event)"
+                    id="1"
+                    maxSize = "7"
+                    directionLinks = "true"
+                    autohide = "true">
+                  </pagination-controls>
+                </div>
+                <p class="no-result-found" *ngIf="show==false">{{constants.NO_RECORD_FOUND}}</p>
+              </div>
+            </div>
+
+            <div class="x_content">
+              <div class="table-responsive pagination-data">
+                <table class="table table-bordered table-striped projects">
+                  <thead>
+                    <tr>
+                      <th>Request Type</th>
+                      <th>Date</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="" *ngFor="let data of dataList.result | paginate : { itemsPerPage:10, currentPage:page, id : 1, totalItems:dataList.totalRecords }">
+                      <td>{{data.requestType.requestType | titlecase}}</td>
+                      <td>{{data.updatedAt | date: 'medium'}}</td>
+                      <td class="project_progress">
+                        <span class="btn-success btn-xs capitalize">{{data.status}}</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="paginattion" *ngIf="show==true">
+                  <pagination-controls
+                    (pageChange) = "page = getDataList($event)"
+                    id="1"
+                    maxSize = "7"
+                    directionLinks = "true"
+                    autohide = "true">
+                  </pagination-controls>
+                </div>
+                <p class="no-result-found" *ngIf="show==false">{{constants.NO_RECORD_FOUND}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>

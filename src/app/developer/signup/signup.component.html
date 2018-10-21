@@ -1,0 +1,99 @@
+<div class="container-fluid">
+        <div class="row">
+            <span class="shadow visible-lg visible-md">developer console</span>
+            <div class="col-md-8 col-sm-8 loginGraphic visible-lg visible-md">
+                <img src="assets/images/device.png" class="img-responsive device">
+                <div class="firstHalf"><!--/GEAR IMAGE/-->                    
+                    <div class="shadow-heading visible-lg visible-md">
+                        <span class="text">developer console</span>
+                    </div>
+                </div>
+                <div class="secondHalf"><!--/BOTTOM RIGHT GRAPH/--></div>
+            </div>
+            <div class="col-md-4 col-sm-4 loginWrap">
+               <form (ngSubmit)="signup()" #signupForm="ngForm" novalidate>
+                <div class="loginForm">
+                   <div class="logo"><img src="assets/images/BitVault-developer-console-icon.png" class="img-responsive"></div>
+                    <div class="formContent" *ngIf="!user.signUpMsg">
+                        <div class="title">BitVault &nbsp; AppStore</div>
+                        <div class="pd20">
+
+                        <div class="form-group" [ngClass]="{'has-error':!complexForm1.controls['username'].valid && complexForm1.controls['username'].touched}">
+                            <input type="text" placeholder="Name" [(ngModel)]="user.username" name="username" [formControl]="complexForm1.controls['username']">
+                            <div *ngIf="complexForm1.controls['username'].hasError('required') && complexForm1.controls['username'].touched" class="alert alert-danger">{{constants.USER_REQUIRED}}</div>
+                            <div *ngIf="complexForm1.controls['username'].hasError('maxlength') && complexForm1.controls['username'].touched" class="alert alert-danger">{{constants.USER_MAX_LENGTH}}</div>
+                        </div>
+                        <div class="hr"></div>
+
+                        <div class="form-group" [ngClass]="{'has-error':!complexForm1.controls['email'].valid && complexForm1.controls['email'].touched}">                            
+                            <input type="email" placeholder="Email Id" [(ngModel)]="user.email" name="email" [formControl]="complexForm1.controls['email']" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+                            <div *ngIf="complexForm1.controls['email'].hasError('pattern') && complexForm1.controls['email'].touched" class="alert alert-danger">{{constants.EMAIL_INVALID}}</div>                            
+                            <div *ngIf="complexForm1.controls['email'].hasError('required') && complexForm1.controls['email'].touched" class="alert alert-danger">{{constants.EMAIL_REQUIRED}}</div>
+                        </div>    
+                        <div class="hr"></div>
+
+                        <div class="form-group" [ngClass]="{'has-error':!complexForm1.controls['password'].valid && complexForm1.controls['password'].touched}">
+                            <input type="password" placeholder="Password" [(ngModel)]="user.password" name="password" [formControl]="complexForm1.controls['password']">
+                            <div *ngIf="complexForm1.controls['password'].hasError('required') && complexForm1.controls['password'].touched" class="alert alert-danger">{{constants.PASSWORD_REQUIRED}}</div>
+                            <div *ngIf="complexForm1.controls['password'].hasError('minlength') && complexForm1.controls['password'].touched" class="alert alert-danger">{{constants.PASSWORD_MIN_LENGTH}}</div>
+                            <div *ngIf="complexForm1.controls['password'].hasError('maxlength') && complexForm1.controls['password'].touched" class="alert alert-danger">{{constants.PASSWORD_MAX_LENGTH}}</div>
+                        </div>
+                        <div class="hr"></div>
+
+                         <div class="form-group" [ngClass]="{'has-error':!complexForm1.controls['confirmPassword'].valid && complexForm1.controls['confirmPassword'].touched}">
+                            <input type="password" placeholder="Confirm password" [(ngModel)]="user.confirmPassword" name="confirmPassword" [formControl]="complexForm1.controls['confirmPassword']" validateEqual="password">
+                            <div *ngIf="complexForm1.controls.confirmPassword.touched && complexForm1.hasError('mismatchedPasswords')" class="alert alert-danger">{{constants.PASSWORD_MISMATCH}}</div>
+                            <div *ngIf="complexForm1.controls['confirmPassword'].hasError('required') && complexForm1.controls['confirmPassword'].touched" class="alert alert-danger">{{constants.CNF_PASS_REQUIRED}}</div>
+                        </div>
+                        <div class="hr"></div>
+
+                        <div class="form-group" [ngClass]="{'has-error':!complexForm1.controls['signupReason'].valid && complexForm1.controls['signupReason'].touched}">
+                            <input type="text" placeholder="Signup reason" [(ngModel)]="user.signupReason" name="signupReason" [formControl]="complexForm1.controls['signupReason']">
+                            <div *ngIf="complexForm1.controls['signupReason'].hasError('required') && complexForm1.controls['signupReason'].touched" class="alert alert-danger">{{constants.REASON_REQUIRED}}</div>
+                        </div>
+                        <div class="hr"></div>
+
+                        <select name="signupAs" [(ngModel)]="user.signupAs" [formControl]="complexForm1.controls['signupAs']"> (change)="signupAsInduvidual()"
+                            <option value="Individual">Signup as Individual</option>
+                            <option value="Organization">Signup as Organization</option>
+                        </select> 
+                        <div *ngIf="user.signupAs =='Organization'" class="form-group" [ngClass]="{'has-error':!complexFormOrg.controls['orgName'].valid && complexFormOrg.controls['orgName'].touched}">
+                            <input type="text" placeholder="Organization Name" [(ngModel)]="user.orgName" name="orgName" [formControl]="complexFormOrg.controls['orgName']">
+                            <div *ngIf="complexFormOrg.controls['orgName'].hasError('required') && complexFormOrg.controls['orgName'].touched" class="alert alert-danger">{{constants.USER_REQUIRED}}</div>
+                            <div class="hr"></div>
+                        </div>
+                         <div *ngIf="user.signupAs =='Organization'" class="form-group" [ngClass]="{'has-error':!complexFormOrg.controls['accEmail'].valid && complexFormOrg.controls['accEmail'].touched}">
+                            <input type="text" placeholder="Organization Email" [(ngModel)]="user.accEmail" name="accEmail" [formControl]="complexFormOrg.controls['accEmail']" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+                            <div *ngIf="complexForm1.controls['accEmail'].hasError('pattern') && complexFormOrg.controls['accEmail'].touched" class="alert alert-danger">{{constants.EMAIL_INVALID}}</div>
+                            <div *ngIf="complexFormOrg.controls['accEmail'].hasError('required') && complexFormOrg.controls['accEmail'].touched" class="alert alert-danger">{{constants.EMAIL_REQUIRED}}</div>
+                            <div class="hr"></div>                            
+                        </div>
+                        <div *ngIf="user.signupAs =='Organization'">
+                            <input type="text" placeholder="Organization Website" [(ngModel)]="user.website" name="website" [formControl]="complexFormOrg.controls['website']" pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$">
+                            <div class="hr"></div>
+                        </div> 
+                        <div class="conditionText">
+                           <label>
+                                <div class="c-checkbox">               
+                                   <input type="checkbox" name="TermAndCond" [(ngModel)]="user.TermAndCond" [formControl]="complexForm1.controls['TermAndCond']">
+                                    <div class="checkmark">&#10004;</div>
+                                    <div *ngIf="complexForm1.controls['TermAndCond'].hasError('required') && complexForm1.controls['TermAndCond'].touched" class="alert alert-danger">{{constants.REASON_REQUIRED}}</div>
+                                </div>Terms & Conditions
+                            </label> <a href="{{appConfig.SERVER_URL}}/privacy-policy.html" target="blank">Privacy Policy</a>
+                        </div>                            
+                        <div class="loginBtnBack">
+                            <input *ngIf="user.signupAs =='Individual'" type="submit" value="Signup" [disabled]="!complexForm1.valid">
+                            <input *ngIf="user.signupAs =='Organization'" type="submit" value="Signup" [disabled]="!complexForm1.valid || !complexFormOrg.valid">
+                        </div>
+                        <div class="h20 visible-lg visible-md"></div>                       
+                        </div>                   
+                    </div>
+                    <div class="formContent" *ngIf="user.signUpMsg" style="border: 1px solid #a89467; border-radius: 10px;">
+                        <div class="pd20 goldText">{{user.signUpMsg}}</div>
+                    </div> 
+                    <a routerLink="/login" class="signupButton">{{!user.signUpMsg ? 'Login' : 'Back'}}</a>
+                </div>                
+            </form>
+        </div>
+    </div>
+</div>

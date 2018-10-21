@@ -1,0 +1,91 @@
+<div class="nav-md">
+  <div class="container body">
+    <div class="main_container">
+      <!-- sidebar menu -->
+    <app-menudashboard></app-menudashboard>
+    <!-- menu sidebarclosed -->
+    <!-- top navigation -->
+    <app-header></app-header>
+  <!-- /top navigation -->
+  <div class="right_col" role="main">
+    <div class="mainwrap">
+      <div class="allapp">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>Manage Users</h2> 
+              <ul class="nav navbar-right panel_toolbox">
+                <button class="btn btn-success" routerLink="/users/useraction">Add New User</button>
+                <button class="btn btn-success" routerLink="/more-user-request">Request to allow more sub users</button>
+              </ul>
+              <input type="text" class="searchBox" name="search" [(ngModel)]="searchString" (ngModelChange)="getUsersList(1)" placeholder="Type at least 2 characters">
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <div class="table-responsive pagination-data">
+                <table class="table table-bordered table-striped projects">
+                  <thead>
+                    <tr>
+                      <th>User Name</th>
+                      <th>Email ID</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="" *ngFor="let user of orgUserListing">
+                      <td>
+                        <span class="appicon">
+                          <img *ngIf="user.avatarURL" src="{{user.avatarURL}}" alt="N/A" class="img-circle profile_img">
+                          <img *ngIf="!user.avatarURL" src="assets/images/user.png" alt="" class="img-circle profile_img">
+                        </span>{{user.username}}         
+                      </td>
+                      <td>{{user.email}}</td>
+                      <td class="project_progress">
+                        <span class="btn-success btn-xs capitalize">{{user.status}}</span>
+                      </td>
+                      <td><a routerLink="/users/useraction/{{user.userId}}"  class="btn btn-fill btn-info"><span class="glyphicon glyphicon-edit"></span> View</a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>                
+                <p class="no-result-found" *ngIf="show==false">{{constants.NO_RECORD_FOUND}}</p>
+                  <ul *ngIf="pager.pages && pager.pages.length && show==true" class="pagination">
+                  <li *ngIf="pager.currentPage != 1" [ngClass]="{disabled:pager.currentPage === 1}">
+                      <a (click)="getUsersList(1)">First</a>
+                  </li>
+                  <li *ngIf="pager.currentPage === 1" [ngClass]="{disabled:pager.currentPage === 1}">
+                      <a>First</a>
+                  </li>
+                  <li *ngIf="pager.currentPage != 1" [ngClass]="{disabled:pager.currentPage === 1}">
+                      <a (click)="getUsersList(pager.currentPage - 1)">Previous</a>
+                  </li>
+                  <li *ngIf="pager.currentPage === 1" [ngClass]="{disabled:pager.currentPage === 1}">
+                      <a>Previous</a>
+                  </li>
+                  <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                      <a (click)="getUsersList(page)">{{page}}</a>
+                  </li>
+                  <li *ngIf="pager.currentPage != pager.totalPages" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                      <a (click)="getUsersList(pager.currentPage + 1)">Next</a>
+                  </li>
+                  <li *ngIf="pager.currentPage === pager.totalPages" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                      <a>Next</a>
+                  </li>
+                  <li *ngIf="pager.currentPage != pager.totalPages" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                      <a (click)="getUsersList(pager.totalPages)">Last</a>
+                  </li>
+                  <li *ngIf="pager.currentPage === pager.totalPages" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                      <a>Last</a>
+                  </li>
+              </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>

@@ -1,0 +1,198 @@
+<div class="nav-md">
+  <div class="container body">
+    <div class="main_container">
+      <!-- sidebar menu -->
+    <app-adminmenudashboard></app-adminmenudashboard>
+    <!-- /sidebar menu -->
+    <!-- top navigation -->
+  <app-adminheader></app-adminheader>
+  <!-- /top navigation -->
+  <!-- page content -->
+  <div class="right_col" role="main">
+    <div class="mainwrap">
+      <div class="allapp">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2 *ngIf="!makeEditable && !updateText" >Add New Application Category</h2>
+              <h2 *ngIf="updateText">Edit Application Category Details</h2>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <br>
+              <form  (submit) = "appCategoryAction()" class="form-horizontal form-label-left" enctype="multipart/form-data">
+                <div class="row" >
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="form-group" *ngIf="!buttonEditable">
+                      <strong class="col-md-4 col-sm-4 col-xs-4">Application Type:
+                      </strong>
+                      <div class="col-md-8 col-sm-8 col-xs-8">
+                        <select [(ngModel)]="categoryModel.appTypeId" name="appTypeId"  class="form-control col-md-7 col-xs-12">
+                          <option *ngFor="let cat of categoryModel.appList" [ngValue]="cat.appTypeId">{{cat.appTypeName}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group" *ngIf="buttonEditable">
+                      <strong class="col-md-4 col-sm-4 col-xs-4">Application Type:
+                      </strong>
+                      <div class="col-md-8 col-sm-8 col-xs-8">
+                        <select [(ngModel)]="categoryModel.appTypeId" name="appTypeId"  class="form-control col-md-7 col-xs-12" disabled>
+                          <option value="1">Apps</option>
+                          <option value="2">Games</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group" [formGroup]="complexForm" [ngClass]="{'has-error':!complexForm.controls['categoryType'].valid && complexForm.controls['categoryType'].touched}">
+                      <strong class="col-md-4 col-sm-4 col-xs-4">Category Name:
+                      </strong>
+                      <div class="col-md-8 col-sm-8 col-xs-8">
+                        <input type="text" pattern="^[a-zA-Z1-9].*" [(ngModel)]="categoryModel.categoryType"  name="categoryType"
+                        [formControl]="complexForm.controls['categoryType']" class="form-control col-md-7 col-xs-12" placeholder="Category Name">
+                        <!-- <div *ngIf="complexForm.controls['categoryType'].hasError('required') && complexForm.controls['categoryType'].touched" class="alert alert-danger">Required</div> -->
+                      </div>
+                    </div>
+                    <!-- Status -->
+                    <div class="form-group">
+                      <strong class="col-md-4 col-sm-4 col-xs-4">Status:
+                      </strong>
+                      <div class="col-md-8 col-sm-8 col-xs-8">
+                        <select [(ngModel)]="categoryModel.status" name="status" class="form-control col-md-7 col-xs-12">
+                          <option [attr.selected]="stat.key == categoryModel.status" *ngFor="let stat of status" [value]="stat.key" >
+                            {{stat.value}}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <!-- Upload Icon -->
+                    <div class="form-group">
+                      <strong class="col-md-4 col-sm-4 col-xs-4">Upload Icon:
+                      </strong>
+                      <div class="col-md-8 col-sm-8 col-xs-8">
+                        <input #fileInput type="file" (change)="readUrl($event)"  name="categoryIconUrl" accept="image/*" id="fileUpload">
+                      </div>
+                    </div>
+                    <!-- Icon Preview -->
+                    <div class="form-group" *ngIf="url.result">
+                      <strong class="col-md-4 col-sm-4 col-xs-4">Icon Preview:
+                      </strong>
+                      <div class="col-md-8 col-sm-8 col-xs-8">
+                        <img src="{{url.result}}" alt="Please select category icon" style="height: 64px; width: 64px; border-radius: 50%">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <strong class="col-md-4 col-sm-4 col-xs-4">Upload Banner:
+                      </strong>
+                       <!-- Upload Banner -->
+                      <div class="col-md-8 col-sm-8 col-xs-8">
+                        <input #fileBanner type="file" (change)="readBannerUrl($event)"  name="categoryBannerUrl" accept="image/*" id="BannerFileUpload">
+                      </div> <br>
+                      <!-- Banner Preview -->
+                    <div class="form-group" *ngIf="bannerUrl.result">
+                      <strong class="col-md-4 col-sm-4 col-xs-4">Banner Preview:
+                      </strong>
+                      <div class="col-md-8 col-sm-8 col-xs-8">
+                        <img src="{{bannerUrl.result}}" alt="Please select category banner" style="height: 64px; width: 50%;">
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-sm-6 col-xs-12" [formGroup]="complexForm" [ngClass]="{'has-error':!complexForm.controls['description'].valid && complexForm.controls['description'].touched}">
+                    <div class="form-group" >
+                      <strong class="col-md-4 col-sm-4 col-xs-4">Description:
+                      </strong>
+                      <div class="col-md-8 col-sm-8 col-xs-8">
+                        <textarea pattern="^[a-zA-Z1-9].*" [(ngModel)]="categoryModel.description" name="description"
+                        [formControl]="complexForm.controls['description']" class="form-control" rows="8" placeholder="Description" style="resize: none;"></textarea>
+                        <!-- <div *ngIf="complexForm.controls['description'].hasError('required') && complexForm.controls['description'].touched" class="alert alert-danger">Required</div> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-5">
+                    <input type="submit" value="Save" *ngIf="!buttonEditable" [disabled]="!complexForm.valid" class="btn btn-success">
+                    <input type="submit" value="Update" *ngIf="buttonEditable" [disabled]="!complexForm.valid" class="btn btn-success">
+                    <button routerLink="/app-category" type="submit" class="btn btn-default">Cancel</button>
+                  </div>
+                </div>
+              </form>
+              <strong style="color: red;" *ngIf="showMsg && applicationList.length>0 && categoryModel.status == 'INACTIVE'">Alert**:- {{showMsg}} application(s) exist with this category. Please move all these application(s) first to another category in order to inactivate.</strong>
+            </div>
+          </div>
+          <div class="x_panel" *ngIf="buttonEditable">
+            <div class="x_title">
+              <h2>Move "{{categoryModel.categoryType}}" Application(s) to Other Category</h2>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content" *ngIf="applicationList.length==0">
+              <p class="no-result-found">{{constants.NO_APP_FOUND}}</p>
+            </div>
+            <div *ngIf="applicationList.length>0" class="x_content">
+              <br>
+              <form  (submit) = "moveApplicationToCat()" class="form-horizontal form-label-left" enctype="multipart/form-data">
+                <div class="row" >
+                  <div class="col-md-6 col-sm-7 col-xs-12">
+                    <div class="form-group">
+                      <div class="col-md-12">
+                        <div class="select-all-block">
+                          <div class="select-all-col">
+                            <div class="conditionText">
+                              <label>
+                                <div class="c-checkbox">
+                                  <input type="checkbox" [(ngModel)]="selectedAll" (change)="selectAll(selectedAll)" name="selectedAll">
+                                  <div class="checkmark">&#10004;</div>
+                                </div>
+                                <strong>Select All</strong>
+                              </label>
+                            </div>
+                          </div>
+                          <div class="auto-scroll-col">
+                            <div class="conditionText" *ngFor="let n of applicationList">
+                              <label>
+                                <div class="c-checkbox">
+                                  <input type="checkbox" [(ngModel)]="tick[n.appApplicationId]" (change)="update(n.appApplicationId, $event)" name="n">
+                                  <div class="checkmark">&#10004;</div>
+                                </div>
+                                {{n.appName}}
+                              </label>
+                            </div>
+                          </div>
+                          <div class="load-more-col" *ngIf="records>10 && applicationList.length != records ">
+                            <span (click)="loadMore()">Load more <i class="fa fa-long-arrow-down"> </i></span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-sm-5 col-xs-12">
+                    <div class="form-group">
+                      <div class="col-md-3 col-sm-4 col-xs-4"><strong>Move To:</strong>
+                      </div>
+                      <div class="col-md-9 col-sm-8 col-xs-8">
+                        <select [(ngModel)]="checkedItem.appCategoryId" name="appCategoryId"  class="form-control">
+                          <option value="undefined" disabled [selected]="checkedItem.appCategoryId === 'undefined'">--Select Category--</option>
+                          <option *ngFor="let cat of catList" [ngValue]="cat.appCategoryId">{{cat.categoryType}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-5">
+                    <input type="submit" value="Move" [disabled]="!checkedItem.appCategoryId || !checkedOrNot" class="btn btn-success">
+                    <button routerLink="/app-category" type="submit" class="btn btn-default">Cancel</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /page content -->
+</div>
+</div>
+</div>

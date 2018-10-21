@@ -1,0 +1,904 @@
+ <div class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+
+      <!-- sidebar menu -->
+      <app-developer-app-menu-dashboard *ngIf="!showMenuBar"></app-developer-app-menu-dashboard>
+      <app-menudashboard *ngIf="showMenuBar"></app-menudashboard>            
+      <!-- /sidebar menu -->
+
+      <!-- top navigation -->
+      <app-header></app-header>
+      <!-- /top navigation -->
+
+    <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="mainwrap">
+            <div class="allapp">             
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="col-md-3">                         
+                      <ul class="nav nav-tabs tabs-left">
+                          <li class="active" id="apk"><a href="#apkwraper" data-toggle="tab">BVK</a></li>
+                          <li class="" id="store-list" 
+                          [style.visibility]="(!UploadAppdata.applicationId) ? 'hidden' : 'visible'"><a href="#storewraper" data-toggle="tab">Store Listing</a></li>
+                          <!--li class="" id="price-dist"><a href="#pricewraper" data-toggle="tab">Pricing & Distribution</a></li-->
+                          <!-- <li class=""><a href="#productwraper" data-toggle="tab">In-app Products</a></li> -->
+                      </ul>                       
+                    </div>
+               <div class="tab-content col-md-9" style="padding:0;">
+                <div class="tab-pane active" id="apkwraper">
+                <div class="x_title"><h2>BVK</h2> <div class="clearfix"></div></div>
+                  <div class="x_content">                  
+                      <div class="bigtabWrapper" role="tabpanel" data-example-id="togglable-tabs">
+                          <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                            <li role="presentation" class="bigTab active">
+                                <a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">
+                                    <span>Production</span> <p>Publish your app on app store</p>
+                                </a>                          
+                            </li>
+                            <li role="presentation" class="bigTab">
+                                <a href="" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">
+                                    <span>Beta Testing</span> <p>Set up Beta testing for your app</p>
+                                </a>
+                            </li>
+                            <li role="presentation" class="bigTab">
+                                <a href="" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">
+                                    <span>Alpha Testing</span> <p>Version</p>
+                                </a>
+                            </li>
+                          </ul>
+                          <div id="myTabContent" class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">                  
+                              <div class="well text-center fixed_height_200">
+                                  <br><br>
+                                  <p *ngIf="!UploadAppdata.applicationId">Upload APP in Production</p>
+                                  <p *ngIf="UploadAppdata.applicationId">Update APP version</p>
+                                  <button (click)="apkModal.open();updateExistingVersion()" id="uploadAppProd" type="button" class="btn btn-success">Upload new BVK</button>
+                              </div>
+                             <div *ngIf="UploadAppdata.applicationId">
+                              <div class="x_title">
+                                <h2>CURRENT BVK <small>{{UploadAppdata.title}}, uploaded on {{UploadAppdata.createdAt | date:'medium'}}</small></h2>
+                                <div class="clearfix"></div>
+                              </div> 
+                             </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+                                  <div class="well text-center fixed_height_200">
+                                  <br><br><p>Upload APP In Beta</p>
+                                  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Upload new BVK</button>
+                              </div>                       
+                              <div>
+                                  <div class="x_title">
+                                    <h2>CURRENT BVK <small>uploaded on May 12, 2017 5:15:20 AM</small></h2>                 
+                                    <div class="clearfix"></div>
+                                  </div>
+                              </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
+                                <div class="well text-center fixed_height_200">
+                                <br><br><p>Upload APP In Alpha</p>
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Upload new BVK</button>
+                              </div>                   
+                              <div>
+                                <div class="x_title">
+                                  <h2>CURRENT BVK <small>uploaded on May 12, 2017 5:15:20 AM</small></h2>                    
+                                  <div class="clearfix"></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    </div>                  
+                  </div>
+              </div>
+              <div class="tab-pane" id="storewraper">
+                <div class="x_title">
+                  <div class="row">
+                    <div class="col-md-8 col-sm-8 col-xs-6"><h2>Store Listing</h2></div>
+                    <div class="col-md-4 col-sm-4 col-xs-6">                     
+                      <select class="pull-right form-control width67" name="status" 
+                      [(ngModel)]="UploadAppdata.status" (change)="UpdateAppStatus(UploadAppdata.status)" *ngIf="UploadAppdata.status">
+                        <option [ngValue]="1" *ngIf="UploadAppdata.status ==1">Draft</option>
+                        <option [ngValue]="2" *ngIf="UploadAppdata.status ==1 || UploadAppdata.status ==2 || UploadAppdata.status ==3">Publish</option>
+                        <option [ngValue]="3" *ngIf="UploadAppdata.status ==3 || UploadAppdata.status ==2">Unpublish</option>
+                        <option [ngValue]="4" *ngIf="UploadAppdata.status ==4">Pending</option>
+                        <option [ngValue]="5" *ngIf="UploadAppdata.status ==5">Rejected</option>
+                     </select>
+                     <label _ngcontent-c2 class="status-label">Status</label>    
+                  </div>                                      
+                  <div class="clearfix"></div>
+                </div>
+                </div>
+                <div class="x_content"><br>
+                    <form #appDetailForm="ngForm" class="form-horizontal form-label-left" novalidate>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Title <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="first-name" class="form-control col-md-7 col-xs-12" placeholder="Application Title" [(ngModel)]="UploadAppdata.title" name="appName" pattern="^[a-zA-Z1-9].*" [formControl]="storeListForm.controls['title']">
+                          <div *ngIf="storeListForm.controls['title'].hasError('required') && storeListForm.controls['title'].touched" class="alert alert-danger">{{constants.APP_TITLE_REQUIRED}}</div> 
+                        </div>
+                      </div>                     
+                      <div class="ln_solid"></div>
+                      
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Short Description <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <textarea class="form-control" rows="2" placeholder="Short Description" name="shortDescription" [(ngModel)]="UploadAppdata.shortDescription"></textarea>
+                        </div>
+                      </div>                     
+                      <div class="ln_solid"></div>
+                      
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Full Description <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <textarea class="form-control" rows="3" placeholder="Full Description" name="fullDescription" [(ngModel)]="UploadAppdata.fullDescription"></textarea>
+                        </div>
+                      </div>                     
+                      <div class="ln_solid"></div>
+                      
+                      <h4>GRAPHIC ASSETS</h4> Screenshot *<br><br>
+
+        <p class="font-gray-dark">JPEG or 24-bit PNG (no alpha). Min length for any size 320px, Max length for any side 3840px.<br> At least 3 screenshots are required for publishing App.</p>
+
+        <form enctype="multipart/form-data" [formGroup]="complexForm" #uploadForm="ngForm" novalidate>
+                   <div class="col-md-6 col-sm-6 col-xs-12">
+                     <h5>APP ICON(PNG, 512px*512px)</h5>
+                     <a class="smallSquare">
+                        <b *ngIf="!UploadAppdata.appIconUrl">+</b>
+                        <p style="font-size:12px;" *ngIf="!UploadAppdata.appIconUrl">Upload App Icon here</p>
+                        <img *ngIf="UploadAppdata.appIconUrl" id="blah" src="{{UploadAppdata.appIconUrl}}" class="img-responsive" title=" " />
+                        <input type="file" (change)="fileChangeIcon($event)" class="cfile-upload" accept=".png" id="app-icon" title=" ">
+                        <span *ngIf="UploadAppdata.appIconUrl" class="bot-lable">Change Icon</span>
+                      </a>
+                   </div>
+                   <div class="col-md-6 col-sm-6 col-xs-12">
+                     <h5>APP BANNER(PNG/JPEG, 1024px*500px)</h5>
+                      <a class="smallSquare">
+                        <b *ngIf="!UploadAppdata.appBannerUrl">+</b>
+                        <p style="font-size:12px;" *ngIf="!UploadAppdata.appBannerUrl">Upload App Banner Image Here</p>  
+                       <img *ngIf="UploadAppdata.appBannerUrl" id="blah" src="{{UploadAppdata.appBannerUrl}}" class="img-responsive" title=" " /> 
+                      <input type="file" (change)="uploadAppBannerAndImages($event, 'BANNER')" class="cfile-upload" accept=".JPEG, .png" id="app-banner" title=" ">
+                      <span *ngIf="UploadAppdata.appBannerUrl" class="bot-lable">Change Banner</span>
+                      </a>
+                   </div>
+                </form>                   
+          
+                <div class="ln_solid"></div>
+                <h4>  App Screenshots    </h4>
+                 <p class="font-gray-dark">JPEG or 24-bit PNG (no alpha). Min length for any size 320px, Max length for any side 3840px.<br> At least 3 screenshots are required for publishing App.</p>
+                <div class="form-group">
+                 <form enctype="multipart/form-data" [formGroup]="complexForm" #uploadForm="ngForm" novalidate>
+                  <div class="appScreen">
+                     <div class="row">
+                     <!--  <div > -->
+                        <div class="col-md-4 col-sm-6" *ngFor='let image of UploadAppdata.listImagesUrls'>
+                          <img src="{{image.appImageUrl}}" class="img-responsive" style="height:127px;width:100%">
+                           <span class="trash-icon" (click) ="deleteImage(image.appImagesId)" title="Remove Image"><i class='fa fa-trash-o' aria-hidden='true'></i> </span>
+                        </div>
+                      <!-- </div> -->
+                      </div>                        
+                      <a class="smallSquare">
+                          <b>+</b>
+                          <p style="font-size:12px;">Upload App Screenshot</p>
+                          <input type='file' (change)="uploadAppBannerAndImages($event, 'IMAGE')" id="files" class="cfile-upload" accept=".png, .JPG, .JPEG, .gif" title=" " />
+                      </a>
+                  </div>           
+            </form>                         
+          </div>          
+          
+          <br><br>
+          <h4>Categorization</h4>                      
+          <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Application Type <span class="required">*</span>
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <select class="select2_single form-control" tabindex="-1" name="appTypeId" [(ngModel)]="UploadAppdata.appTypeId" (change)="updateCategoryList(UploadAppdata.appTypeId, false)" [formControl]=" storeListForm.controls['appTypeId']">
+                <option [ngValue]="1">App</option>
+                <option [ngValue]="2">Game</option>
+              </select>
+            </div>
+          </div>
+        <div class="ln_solid"></div>
+          <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Category <span class="required">*</span>
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <select class="select2_single form-control" tabindex="-1" name="appCategoryId" [(ngModel)]="UploadAppdata.appCategoryId" [formControl]="storeListForm.controls['appCategoryId']">
+                <option [ngValue]="null">Select Application Category</option>
+                <option *ngFor="let item of categoryList" [ngValue]="item.appCategoryId" [hidden]="item.appTypeId != UploadAppdata.appTypeId">{{item.categoryType}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="ln_solid"></div><br>          
+          
+          <h4>Contact Details</h4>                      
+          <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Website <span class="required">*</span>
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12" [formGroup]="storeListForm" [ngClass]="{'has-error':!storeListForm.controls['website'].valid && storeListForm.controls['website'].touched}">
+              <input type="text" class="form-control col-md-7 col-xs-12" name="website" placeholder="Website" [(ngModel)]="UploadAppdata.website" [formControl]="storeListForm.controls['website']" pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$">  
+               <div *ngIf="storeListForm.controls['website'].hasError('pattern') && storeListForm.controls['website'].touched" class="alert alert-danger" [formControl]="storeListForm.controls['website']">{{constants.INVALID_URL}}</div>
+            </div>
+          </div>
+          <div class="ln_solid"></div>
+          <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Email <span class="required">*</span>
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12" [formGroup]="storeListForm" [ngClass]="{'has-error':!storeListForm.controls['email'].valid && storeListForm.controls['email'].touched}">
+              <input type="text"class="form-control col-md-7 col-xs-12" name="email" placeholder="Email id" [(ngModel)]="UploadAppdata.email" [formControl]="storeListForm.controls['email']" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+              <div *ngIf="storeListForm.controls['email'].hasError('pattern') && storeListForm.controls['email'].touched" class="alert alert-danger" [formControl]="storeListForm.controls['email']">{{constants.EMAIL_INVALID}}</div>
+            </div>
+          </div>
+          <div class="ln_solid"></div><br>
+          
+          <h4>Privacy Policy</h4>
+          <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Privacy Policy URL<span class="required">*</span>
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12"  [formGroup]="storeListForm" [ngClass]="{'has-error':!storeListForm.controls['privacyPolicyUrl'].valid && storeListForm.controls['privacyPolicyUrl'].touched}">
+              <input type="text" class="form-control col-md-7 col-xs-12" name="privacyPolicyUrl" placeholder="Privacy Policy URL (http://bitvaultdeveloper.com)" [(ngModel)]="UploadAppdata.privacyPolicyUrl" [formControl]="storeListForm.controls['privacyPolicyUrl']" pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$">
+              <div *ngIf="storeListForm.controls['privacyPolicyUrl'].hasError('pattern') && storeListForm.controls['privacyPolicyUrl'].touched" class="alert alert-danger" [formControl]="storeListForm.controls['privacyPolicyUrl']">{{constants.INVALID_URL}}</div>          
+            </div>
+          </div>          
+          
+          <div class="form-group">
+            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+              <button routerLink="/dashboard" class="btn btn-default" type="button">Cancel</button>
+              <button type="submit" class="btn btn-success" (click)="updateAppDetails()" [disabled]="!storeListForm.valid">Submit</button>
+            </div>
+          </div>
+        </form>
+        </div>
+              <!--div class="tab-pane" id="pricewraper">
+                <div class="x_title">
+                    <h2>Pricing & Distribution</h2>                    
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                      
+                      <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+                      
+                      <div class="row">
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">This application is</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <div id="gender" class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-default active" data-toggle-class="btn-primary" data-toggle-passive-class="btn-primary">
+                                  <input type="radio" data-parsley-id="12"> &nbsp; Free &nbsp;
+                                </label>
+                                <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-primary">
+                                  <input type="radio"> &nbsp; Paid &nbsp;
+                                </label>
+                              </div><br><br>
+                                <p class="font-gray-dark">To publish paid applications, you need to set up a merchant account. <a href="#" class="blue">Set up a merchant account now</a> or <a href="#" class="blue">Learn more</a></p>
+                            </div>                        
+                          </div>
+                      </div>
+                      <div class="ln_solid"></div>
+                      
+                      <div class="form-group">
+                        <h4>Distribution in these Country</h4> 
+                        <p class="font-gray-dark" style="margin-left:10px;">You have selected <b>1 Country</b></p> 
+                        
+                        <div class="row">
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Countries <span class="blue">*</span></label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <button type="button" class="btn btn-success">MANAGE COUNTRIES</button><br><br>
+                                <p class="font-gray-dark">Available in <b>4 countries</b>.</p>
+                            </div>                        
+                          </div>
+                      </div>
+                        
+                        <div style="margin-bottom:15px;">                               
+                            <div>
+                                <table width="100%" cellpadding="0" cellspacing="0" border="0" class="countryTable fixed_headers">
+                                    <thead>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td>
+                                            <label class="control control--radio"> Unavailable
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label class="control control--radio"> Available
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                  </thead>
+                                   <tbody>
+                                    <tr>
+                                        <td>Albania</td>
+                                        <td>
+                                            <label class="control control--radio"><span>Unavailable</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label class="control control--radio"><span>Available</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Albania</td>
+                                        <td>
+                                            <label class="control control--radio"><span>Unavailable</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label class="control control--radio"><span>Available</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Albania</td>
+                                        <td>
+                                            <label class="control control--radio"><span>Unavailable</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label class="control control--radio"><span>Available</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Albania</td>
+                                        <td>
+                                            <label class="control control--radio"><span>Unavailable</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label class="control control--radio"><span>Available</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Albania</td>
+                                        <td>
+                                            <label class="control control--radio"><span>Unavailable</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label class="control control--radio"><span>Available</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Albania</td>
+                                        <td>
+                                            <label class="control control--radio"><span>Unavailable</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label class="control control--radio"><span>Available</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Albania</td>
+                                        <td>
+                                            <label class="control control--radio"><span>Unavailable</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label class="control control--radio"><span>Available</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Albania</td>
+                                        <td>
+                                            <label class="control control--radio"><span>Unavailable</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label class="control control--radio"><span>Available</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Albania</td>
+                                        <td>
+                                            <label class="control control--radio"><span>Unavailable</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label class="control control--radio"><span>Available</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Albania</td>
+                                        <td>
+                                            <label class="control control--radio"><span>Unavailable</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label class="control control--radio"><span>Available</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Albania</td>
+                                        <td>
+                                            <label class="control control--radio"><span>Unavailable</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label class="control control--radio"><span>Available</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Albania</td>
+                                        <td>
+                                            <label class="control control--radio"><span>Unavailable</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label class="control control--radio"><span>Available</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Albania</td>
+                                        <td>
+                                            <label class="control control--radio"><span>Unavailable</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label class="control control--radio"><span>Available</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Albania</td>
+                                        <td>
+                                            <label class="control control--radio"><span>Unavailable</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label class="control control--radio"><span>Available</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Albania</td>
+                                        <td>
+                                            <label class="control control--radio"><span>Unavailable</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label class="control control--radio"><span>Available</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Albania</td>
+                                        <td>
+                                            <label class="control control--radio"><span>Unavailable</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label class="control control--radio"><span>Available</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Albania</td>
+                                        <td>
+                                            <label class="control control--radio"><span>Unavailable</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label class="control control--radio"><span>Available</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Albania</td>
+                                        <td>
+                                            <label class="control control--radio"><span>Unavailable</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label class="control control--radio"><span>Available</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Albania</td>
+                                        <td>
+                                            <label class="control control--radio"><span>Unavailable</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label class="control control--radio"><span>Available</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Albania</td>
+                                        <td>
+                                            <label class="control control--radio"><span>Unavailable</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label class="control control--radio"><span>Available</span>
+                                                <input type="radio">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <p class="font-gray-dark">If you target additional countries with local prices, prices for your in-app products will be automatically generated, based on today's exchange rate.</p>
+                      </div>
+                      
+                      
+                      
+                      <div class="ln_solid"></div>
+                      
+                      <div class="row">
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Primarily Child-Directed</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">                                
+                                <p class="font-gray-dark">Is your app primarily directed towards children under the age of 13 as defined by <a href="#" class="blue">COPPA</a> ?</p>
+                                <label class="control control--radio">Yes
+                                    <input type="radio" name="app"/>
+                                    <div class="control__indicator"></div>
+                                </label>
+                                <label class="control control--radio">No
+                                    <input type="radio" name="app"/>
+                                    <div class="control__indicator"></div>
+                                </label>
+                                <p class="font-gray-dark">If your app is primarily directed towards children, your must opt in to the Designed for Families program below.</p>
+                            </div>                        
+                          </div>
+                      </div>
+                      <div class="ln_solid"></div>
+                      
+                      
+                      <div class="row">
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Contains ads <span class="blue">*</span></label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <p class="font-gray-dark">Does your application have ads? Also, please check out our <a href="#" class="blue">Ads policy</a> to avoid common violations.</p>
+                                <p class="font-gray-dark">If yes, users will be able to see the 'ads' label on your application in the Play Store. <a href="#" class="blue">Learn more</a></p>
+                                <label class="control control--radio">Yes, it has ads
+                                    <input type="radio" name="users"/>
+                                    <div class="control__indicator"></div>
+                                </label>
+                                <label class="control control--radio">No, it has no ads
+                                    <input type="radio" name="users"/>
+                                    <div class="control__indicator"></div>
+                                </label>
+                            </div>                        
+                          </div>
+                      </div>
+                      <br><br>
+                      
+                                          
+                      <div class="well">
+                      
+                      <div class="x_title">
+                        <h2>Device categories</h2>                    
+                        <div class="clearfix"></div>
+                      </div><br>
+                      
+                      <div class="row">
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Android Wear</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <label class="control control--checkbox font-gray-dark"> Distribute your app on Android Wear.
+                                    <input type="checkbox"/>
+                                    <div class="control__indicator"></div>
+                                </label>                                 
+                                <p class="font-gray-dark">To submit your app for review, <a href="#" class="blue">add an Android Wear screenshot, upload an BVK compatible with Android Wear 2.0</a>, and ensure your app follows the <a href="#" class="blue">Wear App Quality</a> guidelines.</p>
+                                <p class="font-gray-dark">To learn more, read the Android Wear <a href="#" class="blue">documentation</a> and <a href="#" class="blue">distribution guidelines</a>.</p>
+                            </div>                        
+                          </div>                          
+                      </div>
+                      
+                      <div class="ln_solid"></div>
+                      
+                      <div class="row">
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Android TV</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <p class="font-gray-dark">Reimagine your app for the biggest screen in the house with Android TV. To submit your app for review, you need to include a <a href="#" class="blue">Leanback launcher intent</a> in your app.</p>                              
+                                <p class="font-gray-dark">To learn more, read the Android TV <a href="#" class="blue">documentation</a> and <a href="#" class="blue">distribution guidelines</a>.</p>
+                            </div>                        
+                          </div>                          
+                      </div>
+                      
+                      <div class="ln_solid"></div>
+                      
+                      <div class="row">
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Android Auto</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">                              
+                                <p class="font-gray-dark">Bring your app to cars with Android Auto. To submit your app for review, you need to accept the Android Auto <a href="#" class="blue">terms and conditions</a>.</p>
+                                <p class="font-gray-dark">To learn more, read the Android Auto <a href="#" class="blue">documentation</a> and <a href="#" class="blue">distribution guidelines</a>.</p>
+                            </div>                        
+                          </div>                          
+                      </div>
+                      
+                      </div>
+                      
+                      
+                      
+                      <div class="well">
+                      
+                      <div class="x_title">
+                        <h2>User programs</h2>                    
+                        <div class="clearfix"></div>
+                      </div><br>
+                      
+                      <div class="row">
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Daydream</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">                              
+                                <p class="font-gray-dark">Submit your app for potential inclusion on Daydream-ready phones.</p>
+                                <p class="font-gray-dark">To learn more, read the Daydream <a href="#" class="blue">documentation</a> and <a href="#" class="blue">distribution guidelines</a>.</p>
+                            </div>                        
+                          </div>                          
+                      </div>
+                      
+                      <div class="ln_solid"></div>
+                      
+                      <div class="row">
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Designed for Families</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                               <label class="control control--checkbox font-gray-dark"> Opt in to Designed for Families
+                                    <input type="checkbox"/>
+                                    <div class="control__indicator"></div>
+                                </label>                                                            
+                                <p class="font-gray-dark">Designed for Families is a developer program for apps and games designed specifically for children and family audiences. <a href="#" class="blue">Learn More</a></p>
+                                <p class="font-gray-dark">To enable opt-in, ensure that you complete the following steps.</p>
+                                <ul class="font-gray-dark">
+                                    <li>Add a privacy policy on the Store Listing page.</li>
+                                    <li>Update your content rating information.</li>
+                                    <li>Confirm the ads declaration on the Pricing and Distribution page.</li>
+                                </ul>
+                            </div>                        
+                          </div>                          
+                      </div>
+                      
+                      <div class="ln_solid"></div>
+                      
+                      <div class="row">
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Managed Google Play</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">                              
+                                <p class="font-gray-dark">Free applications are always available to Android customers through managed Google Play.</p>
+                            </div>                        
+                          </div>                          
+                      </div>
+                      <div class="ln_solid"></div>
+                      
+                      <div class="row">
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Google Play for Education</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">  
+                               <label class="control control--checkbox font-gray-dark"> Distribute your app through Google Play for Education <a href="#" class="blue">Learn more</a>
+                                    <input type="checkbox"/>
+                                    <div class="control__indicator"></div>
+                                </label> 
+                                <p class="font-gray-dark">Checking this box submits this app for inclusion in the "educator recommended" section of Google Play for Education. The final decision on which apps to recommend is made by a 3rd party network of teachers. If your app is selected, we will notify you by e-mail. If not, your app will still be searchable in Google Play for Education.</p>
+                            </div>                        
+                          </div>                          
+                      </div>
+                      
+                    </div>
+                      
+                      
+                      
+                      <div class="well">
+                      
+                      <div class="x_title">
+                        <h2>Consent</h2>                    
+                        <div class="clearfix"></div>
+                      </div><br>
+                      
+                      <div class="row">
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Marketing opt-out</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                               <label class="control control--checkbox font-gray-dark"> Do not promote my application except in Google Play and in any Google-owned online or mobile properties. I understand that any changes to this preference may take sixty days to take effect.
+                                    <input type="checkbox"/>
+                                    <div class="control__indicator"></div>
+                                </label>
+                            </div>                        
+                          </div>                          
+                      </div>
+                      
+                      <div class="ln_solid"></div>
+                      
+                      <div class="row">
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Content guidelines <span class="blue">*</span></label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                               <label class="control control--checkbox font-gray-dark"> This application meets <a href="#" class="blue">Android Content Guidelines.</a>
+                                    <input type="checkbox"/>
+                                    <div class="control__indicator"></div>
+                                </label>                              
+                                <p class="font-gray-dark">Please check out these <a href="#" class="blue">tips on how to create policy compliant app descriptions</a> to avoid some common reasons for app suspension. If your app or store listing is <a href="#" class="blue">eligible for advance notice</a> to the Google Play App Review team, <a href="#" class="blue">contact us</a> prior to publishing.</p>
+                            </div>                        
+                          </div>                          
+                      </div>
+                      
+                      <div class="ln_solid"></div>
+                      
+                      <div class="row">
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">US export laws <span class="blue">*</span></label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">                              
+                                <label class="control control--checkbox font-gray-dark"> I acknowledge that my software application may be subject to United States export laws, regardless of my location or nationality. I agree that I have complied with all such laws, including any requirements for software with encryption functions. I hereby certify that my application is authorized for export from the United States under these laws. <a href="#" class="blue">Learn more</a>
+                                    <input type="checkbox"/>
+                                    <div class="control__indicator"></div>
+                                </label>                                
+                            </div>                        
+                          </div>                          
+                      </div>
+                      
+                      </div>
+                      
+                      </form>
+                  
+                  </div-->
+              </div>
+              <div class="tab-pane" id="productwraper"></div>
+            </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <!-- /page content -->
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="row" id="apkModal">
+  <modal #apkModal  [closeOnEscape]="true"
+        [closeOnOutsideClick]="false">
+    <modal-header>
+     <h4 *ngIf="!UploadAppdata.applicationId" class="modal-title">Add New Application</h4>
+     <h4 *ngIf="UploadAppdata.applicationId" class="modal-title">Update Application Version</h4>
+    </modal-header>
+    <modal-content>
+        <form enctype="multipart/form-data" [formGroup]="complexForm" (ngSubmit)="uploadAPK()" #uploadForm="ngForm" novalidate>
+          <div class="modal-body">
+            <div class="form-group">
+                <label>Select Language</label>
+                <select class="form-control" name ="language" [(ngModel)]="appModel.language" [formControl]="complexForm.controls['language']">
+                    <option value="English">English</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" class="form-control" name="appName" placeholder="Application Title" [(ngModel)]="appModel.title" [formControl]="complexForm.controls['title']" pattern="^[a-zA-Z1-9].*" >
+            </div>
+            <div class="form-group">
+              <label>Application Type</label>
+              <select class="form-control" name="appTypeId" placeholder="Select Application Type" [(ngModel)]="appModel.appTypeId" [formControl]="complexForm.controls['appTypeId']" (change)="updateCategoryList(appModel.appTypeId, false)">
+                  <option value="1">App</option>
+                  <option value="2">Game</option>
+              </select>
+            </div>
+            <div class="form-group">
+                <label>Application Category</label>
+                <select class="form-control" name="appCategoryId" placeholder="Select Category" [(ngModel)]="appModel.appCategoryId" [formControl]="complexForm.controls['appCategoryId']">
+                 <option [ngValue]="null">Select Application Category</option>
+                 <option *ngFor="let item of categoryList" [ngValue]="item.appCategoryId" [hidden]="item.appTypeId != appModel.appTypeId">{{item.categoryType}}</option>
+                </select>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <label>Select BVK File</label>          
+                    <input type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".apk"  required="required" id="upload-apk">
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                  <div class="text-right" style="margin-top: 20px;">
+                    <input type="button" class="btn btn-success" value="Submit" (click)="apkModal.close();uploadAPK()"  [disabled]="!complexForm.valid">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" (click)="apkModal.close()">Cancel</button>
+                </div>
+                </div>
+            </div>             
+          </div>
+        </form>
+      </modal-content>    
+    </modal>
+</div>

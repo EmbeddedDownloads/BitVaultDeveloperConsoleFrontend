@@ -1,0 +1,80 @@
+<div class="container-fluid">
+    <div class="row">
+       <span class="shadow visible-lg visible-md">developer console</span>
+        <div class="col-md-8 col-sm-8 loginGraphic visible-lg visible-md">
+            <img src="assets/images/device.png" class="img-responsive device">
+            <div class="firstHalf"><!--/GEAR IMAGE/-->                    
+                <div class="shadow-heading visible-lg visible-md">
+                    <span class="text">developer console</span>                       
+                </div>                      
+            </div>
+            <div class="secondHalf"><!--/BOTTOM RIGHT GRAPH/--></div>              
+        </div>
+        <div class="col-md-4 col-sm-4 loginWrap">
+          <div class="logo"><img src="assets/images/BitVault-developer-console-icon.png" class="img-responsive"></div>
+          <div *ngIf="userStatus == false" class="loginForm">
+            <form [formGroup]="complexForm" (ngSubmit)="login()" #loginForm="ngForm" novalidate>
+               
+                <div class="formContent">
+                <div class="title">BitVault &nbsp; AppStore</div>
+                <div class="pd20">
+                    <div class="form-group" [ngClass]="{'has-error':!complexForm.controls['username'].valid && complexForm.controls['username'].touched}">
+                        <input type="text" placeholder="Email Id" name="username" [(ngModel)]="user.username" [formControl]="complexForm.controls['username']" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+                        <div *ngIf="complexForm.controls['username'].hasError('pattern') && complexForm.controls['username'].touched" class="alert alert-danger">{{constants.EMAIL_INVALID}}</div>
+                        <div *ngIf="complexForm.controls['username'].hasError('required') && complexForm.controls['username'].touched" class="alert alert-danger">{{constants.EMAIL_REQUIRED}}</div>
+                   </div>
+                   <div class="hr"></div>
+
+                    <div class="form-group" [ngClass]="{'has-error':!complexForm.controls['password'].valid && complexForm.controls['password'].touched}">
+                        <input type="password" placeholder="Password" name="password" [(ngModel)]="user.password" [formControl]="complexForm.controls['password']" pattern="^[a-zA-Z1-9].*" >
+                        <div *ngIf="complexForm.controls['password'].hasError('required') && complexForm.controls['password'].touched" class="alert alert-danger">{{constants.PASSWORD_REQUIRED}}</div>
+                    </div>
+                    <div class="loginBtnBack">
+                        <input type="submit" value="Login" [disabled]="!complexForm.valid">
+                    </div>
+                    <a routerLink="/forgot-pass" class="forPass">Forgot Password ?</a>
+                </div>
+                </div>            
+                <div><a routerLink="/signup" class="signupButton">Signup</a></div>
+            </form>                                                                              
+        </div>
+        
+        <div *ngIf="userStatus == true" class="payment-block">
+            <div class="formContent">
+                <div class="title">BitVault &nbsp; AppStore</div>
+                <div class="pd20">
+                   <!--  <form  (submit)="onSubmit($event)" name="paypal-payment" action="/test.php" id="paypal-payment"> -->
+                   <p>Please select payment mode to pay</p>
+                    <form ngNoForm name="paypal-payment" action="{{formAction}}" method="POST">
+                        <div class="methods-block">            
+                            <div class="wc_payment_method">                
+                                <label for="payment_method_paypal">
+                                <input type="radio" id="paypal" name="payment_method" (change)="payment=1" value="{{payment}}" checked="checked">
+                                PayPal <img src="assets/images/paypal.png" alt="" ><a target="_blank" href="https://www.paypal.com/gb/webapps/mpp/paypal-popup" class="about_paypal">What is PayPal?</a> </label>
+                               <!--  <div *ngIf="payment==1" class="payment_box payment_method_paypal">
+                                    <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p>
+                                </div> -->
+                            </div>
+                            <div class="wc_payment_method cst-mar">                        
+                                <label for="payment_method_gourlpayments">
+                                <input type="radio" id="gourl" name="payment_method" value="{{payment}}" (change)="payment=2">
+                                Bitcoin <img src="assets/images/payments.png" alt=""> </label>
+                                <!-- <div *ngIf="payment==0" class="payment_box payment_method_gourlpayments">
+                                    <p>Secure, anonymous payment with virtual currency. <a target="_blank" href="https://bitcoin.org/">What is bitcoin?</a></p>
+                                </div> -->
+                                <input type="hidden" name="amount" value="{{amount}}">
+                                <input type="hidden" name="email" value="{{user.username}}">
+                                <input type="hidden" name="token" value="{{token}}">
+                                <input type="hidden" name="user" value="{{userId}}">
+                            </div>
+                        </div>
+                       <!--  <input *ngIf="payment==2" type="submit" class="signupButton" value="Pay Registration Signup" (click)="f.submit()"> -->
+                        <input  *ngIf="payment==2" type="submit" class="signupButton" value="Proceed to pay({{amount}}$)">
+                        <input *ngIf="payment==1" type="button" class="signupButton" value="Proceed to pay({{amount}}$)" (click)="submitPayment()">
+                     </form>
+                </div>        
+            </div>
+        </div>
+    </div>
+    </div>
+</div>

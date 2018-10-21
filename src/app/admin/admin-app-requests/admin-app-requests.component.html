@@ -1,0 +1,97 @@
+<div class="nav-md">
+  <div class="container body">
+    <div class="main_container">
+      <!-- sidebar menu -->
+    <app-adminmenudashboard></app-adminmenudashboard>
+    <!-- /sidebar menu -->
+    <!-- top navigation -->
+  <app-adminheader></app-adminheader>
+  <!-- /top navigation -->
+  <div class="right_col" role="main">
+    <div class="mainwrap">
+      <div class="allapp">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>Manage Application Requests</h2>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <!-- start project list -->
+              <div class="table-responsive pagination-data">
+                <table class="table table-bordered  table-striped projects">
+                  <thead>
+                    <tr>
+                      <th>App Title</th>
+                      <th>Requester</th>
+                      <th>Language</th>
+                      <th>Version Name</th>
+                      <th>Status</th>
+                      <th>Requesting For</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor='let app of appRequests'>
+                      <td>
+                        <span class="appicon">
+                          <img src="{{app.appIconUrl}}" alt="App Icon" class="img-circle profile_img">
+                        </span> {{app.title}}
+                      </td>
+                      <td>
+                        {{app.email}}
+                      </td>
+                      <td class="project_progress">
+                        {{app.language}}
+                      </td>
+                      <td>{{app.latestVersionName}}</td>
+                      <td><span class="btn-success btn-xs capitalize">{{app.status | lowercase}}</span></td>
+                      <td><span class="capitalize">{{app.requestFor | lowercase}}</span></td>
+                      <td>
+                        <a routerLink="/application-requests/apps-request-action/{{app.request_Id}}"  class="btn btn-fill btn-info ">
+                          <span class="glyphicon glyphicon-edit"></span> View
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p class="no-result-found" *ngIf="show==false">{{constants.NO_RECORD_FOUND}}</p>
+                <ul *ngIf="pager.pages && pager.pages.length && show==true" class="pagination">
+                <li *ngIf="pager.currentPage != 1" [ngClass]="{disabled:pager.currentPage === 1}">
+                    <a (click)="applicationRequest(1)">First</a>
+                </li>
+                <li *ngIf="pager.currentPage === 1" [ngClass]="{disabled:pager.currentPage === 1}">
+                    <a>First</a>
+                </li>
+                <li *ngIf="pager.currentPage != 1" [ngClass]="{disabled:pager.currentPage === 1}">
+                    <a (click)="applicationRequest(pager.currentPage - 1)">Previous</a>
+                </li>
+                <li *ngIf="pager.currentPage === 1" [ngClass]="{disabled:pager.currentPage === 1}">
+                    <a>Previous</a>
+                </li>
+                <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                    <a (click)="applicationRequest(page)">{{page}}</a>
+                </li>
+                <li *ngIf="pager.currentPage != pager.totalPages" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                    <a (click)="applicationRequest(pager.currentPage + 1)">Next</a>
+                </li>
+                <li *ngIf="pager.currentPage === pager.totalPages" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                    <a>Next</a>
+                </li>
+                <li *ngIf="pager.currentPage != pager.totalPages" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                    <a (click)="applicationRequest(pager.totalPages)">Last</a>
+                </li>
+                <li *ngIf="pager.currentPage === pager.totalPages" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                    <a>Last</a>
+                </li>
+            </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>

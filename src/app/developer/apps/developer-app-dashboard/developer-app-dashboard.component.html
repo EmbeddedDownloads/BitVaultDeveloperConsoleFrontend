@@ -1,0 +1,123 @@
+  <div class="nav-md">
+  <div class="container body">
+    <div class="main_container">
+      <!-- sidebar menu -->
+    <app-developer-app-menu-dashboard></app-developer-app-menu-dashboard>
+    <!-- /sidebar menu -->
+    <!-- top navigation -->
+  <app-header></app-header>
+  <!-- /top navigation -->
+  <!-- page content -->
+  <div class="right_col" role="main">
+    <div class="mainwrap">
+      <div class="allapp">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="row">
+            <!--  Dashbaord -->
+            <div class="widgets-block">
+             <div class="title-block"><h3>{{appTitle}}</h3></div>   
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="widgets-row">
+                    <div class="x_title">
+                  <h2>Installs by users</h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link">View Details</a>
+                    </li>                                   
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                  <p>Last 30 days</p>
+                    <app-dev-install-chart></app-dev-install-chart>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="widgets-row">
+                 <div class="x_title">
+                  <h2>Uninstalls by users</h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link">View Details</a>
+                    </li>                                   
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                  <p>Last 30 days</p>
+                    <app-dev-uninstall-chart></app-dev-uninstall-chart>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="widgets-row full-chart">
+                     <div class="x_title">
+                  <h2>Downloads by users</h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link">View Details</a>
+                    </li>                                   
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                  <p>Last 30 days</p>
+                 
+                    <app-dev-download-chart></app-dev-download-chart>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="widgets-row">
+                   <div class="x_title">
+                  <h2>Installs on active devices</h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link">View Details</a>
+                    </li>                                   
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+
+                <h3 class="count-no">{{ActiveAppCount.activeInstall}}</h3>
+                  <p>Last 30 days</p>
+                    
+                  </div>
+                  <div class="widgets-row">
+                   <div class="x_title">
+                  <h2>Ratings volume</h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link">View Details</a>
+                    </li>                                   
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                 <h3 class="count-no">{{ActiveAppCount.totalRating}}</h3>
+                  <p>Last 30 days</p>
+                    
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="widgets-row">
+                  
+                   <div class="x_title">
+                  <h2>Average Rating</h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link">View Details</a>
+                    </li>                                   
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                
+                <p>Last 30 days</p>
+                    <app-dev-average-rating-chart></app-dev-average-rating-chart>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<app-footer></app-footer>
+</div>
+</div>
+</div>

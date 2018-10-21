@@ -1,0 +1,85 @@
+<div class="nav-md">
+  <div class="container body">
+    <div class="main_container">
+      <!-- sidebar menu -->
+    <app-adminmenudashboard></app-adminmenudashboard>
+    <!-- /sidebar menu -->
+    <!-- top navigation -->
+  <app-adminheader></app-adminheader>
+  <!-- /top navigation -->
+  <div class="right_col" role="main">
+    <div class="mainwrap">
+      <div class="allapp">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>Manage Account Requests</h2>  <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <!-- start project list -->
+              <div class="table-responsive pagination-data">
+                <table class="table table-bordered table-striped projects">
+                  <thead>
+                    <tr>
+                      <th>User Name</th>
+                      <th>Email ID</th>
+                      <th>Account Type</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor='let user of accountRequestss'>
+                      <td>{{user.username}}</td>
+                      <td>{{user.email}}</td>
+                      <td> {{user.signupAs}}</td>
+                      <td class="project_progress">
+                        <span class="btn-success btn-xs capitalize">{{user.status | lowercase}}</span>
+                      </td>
+                      <td>
+                        <a routerLink="/account-requests/account-request-action/{{user.reqId}}"  class="btn btn-fill btn-info ">
+                          <span class="glyphicon glyphicon-edit"></span> View
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p class="no-result-found" *ngIf="show==false">{{constants.NO_RECORD_FOUND}}</p>
+                <ul *ngIf="pager.pages && pager.pages.length && show==true" class="pagination">
+                <li *ngIf="pager.currentPage != 1" [ngClass]="{disabled:pager.currentPage === 1}">
+                    <a (click)="accountRequest(1)">First</a>
+                </li>
+                <li *ngIf="pager.currentPage === 1" [ngClass]="{disabled:pager.currentPage === 1}">
+                    <a>First</a>
+                </li>
+                <li *ngIf="pager.currentPage != 1" [ngClass]="{disabled:pager.currentPage === 1}">
+                    <a (click)="accountRequest(pager.currentPage - 1)">Previous</a>
+                </li>
+                <li *ngIf="pager.currentPage === 1" [ngClass]="{disabled:pager.currentPage === 1}">
+                    <a>Previous</a>
+                </li>
+                <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                    <a (click)="accountRequest(page)">{{page}}</a>
+                </li>
+                <li *ngIf="pager.currentPage != pager.totalPages" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                    <a (click)="accountRequest(pager.currentPage + 1)">Next</a>
+                </li>
+                <li *ngIf="pager.currentPage === pager.totalPages" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                    <a>Next</a>
+                </li>
+                <li *ngIf="pager.currentPage != pager.totalPages" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                    <a (click)="accountRequest(pager.totalPages)">Last</a>
+                </li>
+                <li *ngIf="pager.currentPage === pager.totalPages" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                    <a>Last</a>
+                </li>
+            </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

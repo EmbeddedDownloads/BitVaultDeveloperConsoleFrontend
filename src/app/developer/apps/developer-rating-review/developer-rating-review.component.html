@@ -1,0 +1,122 @@
+<div class="nav-md">
+  <div class="container body">
+    <div class="main_container">
+      <!-- sidebar menu -->
+    <app-developer-app-menu-dashboard></app-developer-app-menu-dashboard>
+    <!-- /sidebar menu -->
+    <!-- top navigation -->
+  <app-header></app-header>
+  <!-- /top navigation -->
+  <!-- page content -->
+  <div class="right_col" role="main">
+    <div class="mainwrap">
+      <div class="allapp">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="row">
+            <!--  Ratings -->
+            <div class="widgets-block">
+              <div class="title-block"><h3>{{appTitle}}</h3></div>   
+              <h4>Ratings</h4>
+              <div class="widgets-row">
+                <div class="rating-block">
+                  <div class="row">
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                      Average Ratings
+                      <strong>{{rateReviewCount.avgRating}} <!-- <i class="fa fa-star"> </i> --></strong>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                      Total Ratings
+                      <strong>{{rateReviewCount.totalRating}}</strong>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                      Rating With Reviews
+                      <strong>{{rateReviewCount.reviewWithRating}}</strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--Reviews -->
+            <div class="widgets-block">
+              <h4>Reviews</h4>
+              <div class="widgets-row" *ngFor="let rr of ratingReview">
+                <div class="review-block rating-container">
+                  <div class="row">
+                    <div class="col-md-1 col-sm-2 col-xs-12">
+                      <span _ngcontent-c2="" class="appicon">
+                        <img _ngcontent-c2="" alt="..." class="img-circle profile_img" src="assets/images/call.png">
+                      </span>
+                    </div>
+                    <div class="col-md-9 col-sm-7 col-xs-12">
+                      <div class="review-description">
+                        <p><strong>Public Address </strong> {{rr.createdAt | date:'medium'}}</p>
+                        <div class="rating-stars">
+                          <span class="empty-stars">
+                            <span class="star"><i class="fa fa-star-o"></i></span>
+                            <span class="star"><i class="fa fa-star-o"></i></span>
+                            <span class="star"><i class="fa fa-star-o"></i></span>
+                            <span class="star"><i class="fa fa-star-o"></i></span>
+                            <span class="star"><i class="fa fa-star-o"></i></span>
+                          </span>
+                          <span class="filled-stars" *ngIf="rr.appRating==1" style="width: 20%;">
+                            <span class="star"><i class="fa fa-star"></i></span>
+                            <span class="star"><i class="fa fa-star"></i></span>
+                            <span class="star"><i class="fa fa-star"></i></span>
+                            <span class="star"><i class="fa fa-star"></i></span>
+                            <span class="star"><i class="fa fa-star"></i></span>
+                          </span>
+                          <span class="filled-stars" *ngIf="rr.appRating==2" style="width: 40%;">
+                            <span class="star"><i class="fa fa-star"></i></span>
+                            <span class="star"><i class="fa fa-star"></i></span>
+                            <span class="star"><i class="fa fa-star"></i></span>
+                            <span class="star"><i class="fa fa-star"></i></span>
+                            <span class="star"><i class="fa fa-star"></i></span>
+                          </span>
+                          <span class="filled-stars" *ngIf="rr.appRating==3" style="width: 60%;">
+                            <span class="star"><i class="fa fa-star"></i></span>
+                            <span class="star"><i class="fa fa-star"></i></span>
+                            <span class="star"><i class="fa fa-star"></i></span>
+                            <span class="star"><i class="fa fa-star"></i></span>
+                            <span class="star"><i class="fa fa-star"></i></span>
+                          </span>
+                          <span class="filled-stars" *ngIf="rr.appRating==4" style="width: 80%;">
+                            <span class="star"><i class="fa fa-star"></i></span>
+                            <span class="star"><i class="fa fa-star"></i></span>
+                            <span class="star"><i class="fa fa-star"></i></span>
+                            <span class="star"><i class="fa fa-star"></i></span>
+                            <span class="star"><i class="fa fa-star"></i></span>
+                          </span>
+                          <span class="filled-stars" *ngIf="rr.appRating==5" style="width: 100%;">
+                            <span class="star"><i class="fa fa-star"></i></span>
+                            <span class="star"><i class="fa fa-star"></i></span>
+                            <span class="star"><i class="fa fa-star"></i></span>
+                            <span class="star"><i class="fa fa-star"></i></span>
+                            <span class="star"><i class="fa fa-star"></i></span>
+                          </span>
+                        </div>
+                        <p class="comment-dec">{{rr.appReview}} </p>
+                        <form>
+                        <input type="text" [(ngModel)]="rr.replyResponse" name="replyResponse" class="comment-box" placeholder="Reply to this Review">
+                        <input type="submit" value="Submit" id="ratingbutton" (click)="replyReview(rr.appRateReviewId, rr.replyResponse)" class="btn btn-success">  
+                        </form>
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+              <div class="widgets-row" *ngIf="ratingReview.length==0">
+                <p>No review available!</p>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<app-footer></app-footer>
+</div>
+</div>
+</div>

@@ -1,0 +1,158 @@
+<div class="nav-md">
+  <div class="container body">
+    <div class="main_container">
+      <!-- sidebar menu -->
+    <app-adminmenudashboard></app-adminmenudashboard>
+    <!-- /sidebar menu -->
+    <!-- top navigation -->
+  <app-adminheader></app-adminheader>
+  <!-- /top navigation -->
+  <!-- page content -->
+  <div class="right_col" role="main">
+    <div class="mainwrap">
+      <div class="allapp">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="row top_tiles">
+            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+              <div class="tile-stats">
+                <div class="icon">
+                  <img src="assets/images/developer-icon.png" alt="">
+                  <!-- <i class="glyphicon glyphicon-user"></i> --></div>
+                  <div class="count">{{getCount.devCount}}</div>
+                  <h3>Total Developer<span>(s)</span></h3>
+                </div>
+              </div>
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                  <div class="icon">
+                    <img src="assets/images/active-app-icon.png" alt="">
+                    <!-- <i class="fa fa-signal"></i> -->
+                  </div>
+                  <div class="count">{{getCount.activeAppsCount}}</div>
+                  <h3>Total Active App<span>(s)</span></h3>
+                </div>
+              </div>
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                  <div class="icon">
+                    <img src="assets/images/paid-app-icon2.png" alt="">
+                    <!-- <i class="fa fa-sort-amount-desc"></i> -->
+                  </div>
+                  <div class="count">{{getCount.paidAppsCount}}</div>
+                  <h3>Total Paid App<span>(s)</span></h3>
+                </div>
+              </div>
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                  <div class="icon">
+                    <img src="assets/images/free-app-icon.png" alt="">
+                    <!-- <i class="fa fa-check-square-o"></i> -->
+                  </div>
+                  <div class="count">{{getCount.freeAppsCount}}</div>
+                  <h3>Total Free App<span>(s)</span></h3>
+                </div>
+              </div>
+            </div>
+            <div class="x_panel">
+              <div class="x_title">
+                <h2>Account Requests</h2>
+                <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
+                <!-- start project list -->
+                <div class="table-responsive">
+                  <table class="table table-bordered table-striped projects">
+                    <thead>
+                      <tr>
+                        <th>User Name</th>
+                        <th>Email ID</th>
+                        <th>Account Type</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor='let accdata of accountData'>
+                        <td>
+                          <span class="appicon">
+                            <img src="assets/images/user.png" alt="..." class="img-circle profile_img">
+                          </span> {{accdata.username}}
+                        </td>
+                        <td>
+                          {{accdata.email}}
+                        </td>
+                        
+                        <td>
+                          {{accdata.signupAs}}
+                        </td>
+                        <td class="project_progress">
+                          <span class="btn-success btn-xs capitalize">{{accdata.status | lowercase}}</span>
+                        </td>
+                        <td>
+                          <a routerLink="/account-requests/account-request-action/{{accdata.reqId}}"  class="btn btn-fill btn-info ">
+                            <span class="glyphicon glyphicon-edit"></span> View
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <!-- end project list -->
+                  <p class="no-result-found" *ngIf="showAccountMessage==true">{{constants.NO_RECORD_FOUND}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="x_panel">
+              <div class="x_title">
+                <h2>Application Requests</h2>
+                <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
+                <!-- start project list -->
+                <div class="table-responsive">
+                  <table class="table table-bordered table-striped projects">
+                    <thead>
+                      <tr>
+                        <th>App Title</th>
+                        <th>Requester</th>
+                        <th>Language</th>
+                        <th>Version Name</th>
+                        <th>Status</th>
+                        <th>Requesting For</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor='let appdata of applicationData'>
+                        <td>
+                          <span class="appicon">
+                            <img src="{{appdata.appIconUrl}}" alt="Icon" class="img-circle profile_img">
+                          </span> {{appdata.title}}
+                        </td>
+                        <td>{{appdata.email}}</td>
+                        <td>{{appdata.language}}</td>
+                        <td>{{appdata.latestVersionName}}</td>
+                        <td>
+                          <span class="btn-success btn-xs capitalize">{{appdata.status | lowercase}}</span>
+                        </td>
+                        <td><span class="capitalize">{{appdata.requestFor | lowercase}}</span></td>
+                        <td>
+                          <a routerLink="/application-requests/apps-request-action/{{appdata.request_Id}}"  class="btn btn-fill btn-info ">
+                            <span class="glyphicon glyphicon-edit"></span> View
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <!-- end project list -->
+                  <p class="no-result-found" *ngIf="showAppMessage==true">{{constants.NO_REQUEST_FOUND}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <app-adminfooter></app-adminfooter>
+</div>
+</div>
+</div>

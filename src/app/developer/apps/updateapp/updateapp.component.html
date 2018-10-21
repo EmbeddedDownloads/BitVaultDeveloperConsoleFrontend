@@ -1,0 +1,217 @@
+ <div class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+
+      <!-- sidebar menu -->
+        <app-menudashboard></app-menudashboard>            
+      <!-- /sidebar menu -->
+
+      <!-- top navigation -->
+        <app-header></app-header>
+      <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="mainwrap">
+            <div class="allapp">             
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="x_panel">
+                      
+                      <!--App menus -->
+                      <app-appmenu></app-appmenu>
+
+                      <div class="col-md-10 col-sm-10 col-xs-10">
+                      <div class="x_title">
+                    
+                    <h2>Store Listing</h2>                    
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <br>
+                    <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Title <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>                     
+                      <div class="ln_solid"></div>
+                      
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Short Discription <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <textarea class="form-control" rows="2" placeholder="Short Discription"></textarea>
+                        </div>
+                      </div>                     
+                      <div class="ln_solid"></div>
+                      
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Full Discription <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <textarea class="form-control" rows="5" placeholder="Full Discription"></textarea>
+                        </div>
+                      </div>                     
+                      <div class="ln_solid"></div>
+                      
+                      <h4>GRAPHIC ASSETS</h4> Screenshot *<br><br>
+
+
+<p class="font-gray-dark">JPEG or 24-bit PNG (no alpha). Min length for any side 320px, Max length for any side 3840px.<br>
+At least 2 screenshots are required overall Max 8 screenshots per type. Drag to reorder or to move between types.</p>
+
+<p class="font-gray-dark">For your app to be showcased in the 'Designed tablets' list in the Play Store. you need to upload at least one 7-inch and one 10-inch screenshot. If you previously <br>
+upload screenshots, make sure to move them into right area below.</p><br><br>
+                      
+                      
+                      <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                      <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Phone</a></li>
+                        <!--li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Tablets</a></li-->                        
+                      </ul>
+                      <div id="myTabContent" class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                              <a class="smallSquare">
+                                  <b>+</b>
+                                  <p style="font-size:12px;">Add screen</p>
+                                  <p style="font-size:12px;">Drop Image Here</p>
+                              </a>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+                         <a class="smallSquare">
+                                  <b>+</b>
+                                  <p style="font-size:12px;">Add screen</p>
+                                  <p style="font-size:12px;">Drop Image Here</p>
+                              </a>
+                        </div>                        
+                      </div>
+                    </div>                      
+                      
+                      <div class="ln_solid"></div>
+                      
+                      <div class="form-group">
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                            <a class="smallSquare">
+                                  <b>+</b>
+                                  <p style="font-size:12px;">Add screen</p>
+                                  <p style="font-size:12px;">Drop Image Here</p>
+                              </a>
+                        </div>                          
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <a class="largeSquare">
+                                  <b>+</b>
+                                  <p style="font-size:12px;">Add screen</p>
+                                  <p style="font-size:12px;">Drop Image Here</p>
+                              </a> &nbsp;
+                              <a class="mediumSquare">
+                                  <b>+</b>
+                                  <p style="font-size:12px;">Add screen</p>
+                                  <p style="font-size:12px;">Drop Image Here</p>
+                              </a>
+                        </div>                        
+                      </div>
+                      
+                      
+                      <br><br>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Promo Video <span class="required">*</span><p class="font-gray-dark">Youtube Video<br>Please enter a URL</p></label>
+                          
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <br><br>
+                      
+                      <h4>Categorization</h4>                      
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Application Type <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select class="select2_single form-control" tabindex="-1">
+                            <option></option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Category <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select class="select2_single form-control" tabindex="-1">
+                            <option></option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="ln_solid"></div>
+                      <br><br>
+                      
+                      
+                      
+                      
+                      <h4>Contact Details</h4>                      
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Website <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Email <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" required="required" class="form-control col-md-7 col-xs-12">
+                          <p class="font-gray-dark">Using the grid system you can control the position of the labels.</p>
+                        </div>
+                      </div>
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Phone <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div> 
+                      <div class="ln_solid"></div>
+                      <br><br>
+                      
+                      
+                      <h4>Privacy Policy</h4>
+                      <p class="font-gray-dark">Using the grid system you can control the position of the labels. The form example below has the <b>col-md-10</b> 
+                      which sets the width to 10/12 and <b>center-margin</b> which centers it.</p>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Privacy Policy <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div> 
+                      
+                      
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                          <button class="btn btn-primary" type="button">Cancel</button>
+              <button class="btn btn-primary" type="reset">Reset</button>
+                          <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                      </div>
+
+                    </form>
+                  </div>
+                      </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+       
+      </div>
+    </div>  
+  
+  </div>

@@ -1,0 +1,126 @@
+ <div class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="clearfix"></div>
+
+            <!-- sidebar menu -->
+            <app-adminmenudashboard></app-adminmenudashboard>
+            <!-- /sidebar menu -->
+          </div>
+        </div>
+
+        <!-- top navigation -->
+       <app-adminheader></app-adminheader>
+        <!-- /top navigation -->
+
+                <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="mainwrap">
+            <div class="allapp">             
+              <div class="col-md-12 col-sm-12 col-xs-12">
+               
+                
+                
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Add New Application Category</h2>                    
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <br>
+                    <form  (submit) = "addAppCategory()" id="demo-form2" class="form-horizontal form-label-left" enctype="multipart/form-data">
+                    <div class="row" >
+                      <div class="col-md-6 col-sm-6 col-xs-6">
+
+                      <div class="form-group">
+                        <strong class="col-md-4 col-sm-4 col-xs-4">Application Type:
+                        </strong>
+                        <div class="col-md-8 col-sm-8 col-xs-8">
+                          <select [(ngModel)]="categoryModel.appTypeId" name="appTypeId"  class="form-control col-md-7 col-xs-12">
+                              <option value="1" selected>Apps</option>
+                              <option value="2">Games</option>
+                          </select>
+                        </div>
+                      </div>
+
+                        <div class="form-group" [formGroup]="complexForm" [ngClass]="{'has-error':!complexForm.controls['categoryType'].valid && complexForm.controls['categoryType'].touched}">
+
+                        <strong class="col-md-4 col-sm-4 col-xs-4">Category Name:
+                        </strong>
+                        <div class="col-md-8 col-sm-8 col-xs-8">
+                          <input type="text" [(ngModel)]="categoryModel.categoryType"  name="categoryType" 
+                          [formControl]="complexForm.controls['categoryType']" class="form-control col-md-7 col-xs-12" placeholder="Category Name">
+
+                        <!-- <div *ngIf="complexForm.controls['categoryType'].hasError('required') && complexForm.controls['categoryType'].touched" class="alert alert-danger">Required</div> -->
+                        </div>
+
+                        
+                      </div>
+
+                      <!-- Upload Icon -->
+                      <div class="form-group">
+                        <strong class="col-md-4 col-sm-4 col-xs-4">Upload Icon:<!--  -->
+                        </strong>
+                        <div class="col-md-8 col-sm-8 col-xs-8">
+                          <input type="file" (change)="fileChange($event)" class="form-control col-md-7 col-xs-12" name="categoryIcon">
+                        </div>
+                      </div>
+                      
+                      <!-- Status -->
+                      <div class="form-group">
+                        <strong class="col-md-4 col-sm-4 col-xs-4">Status:
+                        </strong>
+                        <div class="col-md-8 col-sm-8 col-xs-8">
+                          <select [(ngModel)]="categoryModel.status" name="status" class="form-control col-md-7 col-xs-12">
+                            <!-- <option value="undefined" disabled [selected]="categoryModel.status === 'undefined'">--Select Status--</option> -->
+                            <option [attr.selected]="stat.key == categoryModel.status" *ngFor="let stat of status" [value]="stat.key" >
+                               {{stat.value}} 
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+
+                      <div class="col-md-6 col-sm-6 col-xs-6" [formGroup]="complexForm" [ngClass]="{'has-error':!complexForm.controls['description'].valid && complexForm.controls['description'].touched}">
+                        <div class="form-group" >
+
+                        <strong class="col-md-4 col-sm-4 col-xs-4">Description:
+                        </strong>
+
+                        <div class="col-md-8 col-sm-8 col-xs-8">
+
+                          <textarea [(ngModel)]="categoryModel.description" name="description" 
+                          [formControl]="complexForm.controls['description']" class="form-control" rows="6" placeholder="Description" style="resize: none;"></textarea>
+
+                          <!-- <div *ngIf="complexForm.controls['description'].hasError('required') && complexForm.controls['description'].touched" class="alert alert-danger">Required</div> -->
+
+                        </div>
+
+                      </div> 
+                      </div>
+                    </div>
+                      
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-5">                          
+                          <input type="submit" value="Save" [disabled]="!complexForm.valid" class="btn btn-success">
+                          <button routerLink="/app-category" type="submit" class="btn btn-primary">Cancel</button>
+                        </div>
+                      </div>
+
+                    </form>
+                  </div>
+                </div>
+               </div>
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+
+</div>
+</div>
+</div>
+

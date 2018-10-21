@@ -1,0 +1,40 @@
+<div class="container-fluid">
+    <div class="row">
+        <span class="shadow visible-lg visible-md">Admin console</span>
+        <div class="col-md-8 col-sm-8 loginGraphic visible-lg visible-md">
+            <img src="assets/images/device.png" class="img-responsive device">
+            <div class="firstHalf"><!--/GEAR IMAGE/-->
+            <div class="shadow-heading visible-lg visible-md">
+                <span class="text">Admin console</span>
+            </div>
+        </div>
+        <div class="secondHalf"><!--/BOTTOM RIGHT GRAPH/--></div>
+    </div>
+    <div class="col-md-4 col-sm-4 loginWrap">
+        <div class="loginForm">
+            <form [formGroup]="complexForm" (ngSubmit)="login()" #loginForm="ngForm" novalidate>
+                <div class="logo"><img src="assets/images/BitVault-developer-console-icon.png" class="img-responsive"></div>
+                <div class="formContent">
+                    <div class="title">BitVault AppStore Admin Login</div>
+                    <div class="pd20">
+                        <div class="form-group" [ngClass]="{'has-error':!complexForm.controls['username'].valid && complexForm.controls['username'].touched}">
+                            <input type="email" placeholder="Email Id" name="username" [(ngModel)]="user.username" [formControl]="complexForm.controls['username']" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+                            <div *ngIf="complexForm.controls['username'].hasError('pattern') && complexForm.controls['username'].touched" class="alert alert-danger">Email is invalid</div>
+                            <div *ngIf="complexForm.controls['username'].hasError('required') && complexForm.controls['username'].touched" class="alert alert-danger">{{constants.EMAIL_REQUIRED}}</div>
+                        </div>
+                        <div class="hr"></div>
+                        <div class="form-group" [ngClass]="{'has-error':!complexForm.controls['password'].valid && complexForm.controls['password'].touched}">
+                            <input type="password" placeholder="Password" name="password" [(ngModel)]="user.password" [formControl]="complexForm.controls['password']" autocomplete="new-password">
+                            <div *ngIf="complexForm.controls['password'].hasError('required') && complexForm.controls['password'].touched" class="alert alert-danger">{{constants.PASSWORD_REQUIRED}}</div>
+                        </div>
+                        <div class="loginBtnBack">
+                            <input type="submit" value="Login" [disabled]="!complexForm.valid">
+                        </div>
+                        <a routerLink="/admin-forget-password" class="forPass">Forgot Password ?</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>

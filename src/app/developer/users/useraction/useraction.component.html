@@ -1,0 +1,149 @@
+<div class="nav-md">
+  <div class="container body">
+    <div class="main_container">
+      <!-- sidebar menu -->
+    <app-menudashboard></app-menudashboard>
+    <!-- menu sidebarclosed -->
+    <!-- top navigation -->
+    <app-header></app-header>
+  <!-- /top navigation -->
+   <div class="right_col" role="main">
+    <div class="mainwrap">
+      <div class="allapp">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>Manage User {{user.username}} </h2> 
+              <ul class="nav navbar-right panel_toolbox">
+                <button class="btn btn-success" routerLink="/more-user-request">Request for add more sub users</button>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content" *ngIf="!id"><br>
+              <form [formGroup]="complexForm" (ngSubmit)="addUser()" #addUserDetails="ngForm" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+                <div class="form-group" [ngClass]="{'has-error':!complexForm.controls['username'].valid && complexForm.controls['username'].touched}">
+                  <strong class="control-label col-md-3 col-sm-3 col-xs-12">User Name:</strong>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" [(ngModel)]="user.username" name="username" [formControl]="complexForm.controls['username']" class="form-control col-md-7 col-xs-12" placeholder="Username" pattern="^\w+([a-z A-Z1-9])+$">
+                     <div *ngIf="complexForm.controls['username'].hasError('required') && complexForm.controls['username'].touched">{{constants.USER_REQUIRED}}</div>
+                     <div *ngIf="complexForm.controls['username'].hasError('pattern') && complexForm.controls['username'].touched">{{constants.INVALID_PATTERN}}</div>
+                     <div *ngIf="complexForm.controls['username'].hasError('maxlength') && complexForm.controls['username'].touched">{{constants.USER_MAX_LENGTH}}</div>
+                  </div>
+                </div>
+                <div class="form-group" [ngClass]="{'has-error':!complexForm.controls['email'].valid && complexForm.controls['email'].touched}">
+                  <strong class="control-label col-md-3 col-sm-3 col-xs-12">Email ID:
+                  </strong>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" [(ngModel)]="user.email" name="email" class="form-control col-md-7 col-xs-12" [formControl]="complexForm.controls['email']" placeholder="Email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+                  <div *ngIf="complexForm.controls['email'].hasError('pattern') && complexForm.controls['email'].touched">{{constants.EMAIL_INVALID}}</div>
+                  <div *ngIf="complexForm.controls['email'].hasError('required') && complexForm.controls['email'].touched">{{constants.EMAIL_REQUIRED}}</div>
+                  </div>
+                </div>
+                <div class="form-group" [ngClass]="{'has-error':!complexForm.controls['password'].valid && complexForm.controls['password'].touched}">
+                  <strong class="control-label col-md-3 col-sm-3 col-xs-12">Password:
+                  </strong>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="password" [(ngModel)]="user.password" name="password" class="form-control col-md-7 col-xs-12" [formControl]="complexForm.controls['password']" placeholder="Password">
+                    <div *ngIf="complexForm.controls['password'].hasError('required') && complexForm.controls['password'].touched">{{constants.PASSWORD_REQUIRED}}</div>
+                    <div *ngIf="complexForm.controls['password'].hasError('minlength') && complexForm.controls['password'].touched">{{constants.PASSWORD_MIN_LENGTH}}</div>
+                    <div *ngIf="complexForm.controls['password'].hasError('maxlength') && complexForm.controls['password'].touched">{{constants.PASSWORD_MAX_LENGTH}}</div>
+                  </div>
+                </div>
+                <div class="form-group" [ngClass]="{'has-error':!complexForm.controls['confirmPassword'].valid && complexForm.controls['confirmPassword'].touched}">
+                  <strong class="control-label col-md-3 col-sm-3 col-xs-12">Confirm Password:
+                  </strong>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="password" [(ngModel)]="user.confirmPassword" name="confirmPassword" class="form-control col-md-7 col-xs-12" [formControl]="complexForm.controls['confirmPassword']" placeholder="Confirm Password">
+                    <div *ngIf="complexForm.controls.confirmPassword.touched && complexForm.hasError('mismatchedPasswords')">{{constants.PASSWORD_MISMATCH}}</div>
+                    <div *ngIf="complexForm.controls['confirmPassword'].hasError('minlength') && complexForm.controls['confirmPassword'].touched">{{constants.PASSWORD_MIN_LENGTH}}</div>
+                    <div *ngIf="complexForm.controls['confirmPassword'].hasError('maxlength') && complexForm.controls['confirmPassword'].touched">{{constants.PASSWORD_MAX_LENGTH}}</div>
+                  </div>
+                </div>
+                <div class="form-group" *ngIf="user.status">
+                  <strong class="control-label col-md-3 col-sm-3 col-xs-12">Status:
+                  </strong>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <select [(ngModel)]="user.status" name="status" class="form-control col-md-7 col-xs-12" [formControl]="complexForm.controls['status']">
+                      <option value="ACTIVE">Active</option>
+                      <option value="INACTIVE">Inactive</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                   <input [disabled]="!complexForm.valid" type="submit" value="Submit" class="btn btn-success">
+                  <button routerLink="/users" class="btn btn-default">Cancel</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <div class="x_content" *ngIf="id"><br>
+              <form [formGroup]="complexForm1" (ngSubmit)="updateUser()" #addUserDetails="ngForm" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+                <div class="form-group">
+                  <strong class="control-label col-md-3 col-sm-3 col-xs-12">User Name:</strong>
+                  <div class="col-md-6 col-sm-6 col-xs-12" [ngClass]="{'has-error':!complexForm1.controls['username'].valid && complexForm1.controls['username'].touched}">
+                    <input type="text" [(ngModel)]="user.username" name="username" [formControl]="complexForm1.controls['username']" class="form-control col-md-7 col-xs-12" placeholder="Username" pattern="^\w+([a-zA-Z])+$">
+                     <div *ngIf="complexForm1.controls['username'].hasError('required') && complexForm1.controls['username'].touched">{{constants.USER_REQUIRED}}</div>
+                      <div *ngIf="complexForm1.controls['username'].hasError('pattern') && complexForm1.controls['username'].touched">{{constants.USERNAME_INVALID_PATTERN}}</div>
+                     <div *ngIf="complexForm1.controls['username'].hasError('maxlength') && complexForm1.controls['username'].touched">{{constants.USER_MAX_LENGTH}}</div>
+                  </div>
+                </div>
+                <div class="form-group" [ngClass]="{'has-error':!complexForm1.controls['email'].valid && complexForm1.controls['email'].touched}">
+                  <strong class="control-label col-md-3 col-sm-3 col-xs-12">Email ID:
+                  </strong>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" [(ngModel)]="user.email" name="email" class="form-control col-md-7 col-xs-12" [formControl]="complexForm1.controls['email']" placeholder="Email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+                  <div *ngIf="complexForm1.controls['email'].hasError('pattern') && complexForm1.controls['email'].touched">{{constants.EMAIL_INVALID}}</div>
+                  <div *ngIf="complexForm1.controls['email'].hasError('required') && complexForm1.controls['email'].touched">{{constants.EMAIL_REQUIRED}}</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <strong class="control-label col-md-3 col-sm-3 col-xs-12">New Password:
+                  </strong>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="password" [(ngModel)]="user.newPassword" name="newPassword" class="form-control col-md-7 col-xs-12" [formControl]="complexForm1.controls['newPassword']" placeholder="New Password">
+                  <!--  <div *ngIf="complexForm1.controls['newPassword'].hasError('pattern') && complexForm1.controls['newPassword'].touched" class="alert alert-danger">{{constants.PASSWORD_MIN_LENGTH}}</div> -->
+                   <!--  <div *ngIf="complexForm1.controls['password'].hasError('maxlength') && complexForm1.controls['password'].touched" class="alert alert-danger">{{constants.PASSWORD_MAX_LENGTH}}</div> -->
+                  </div>
+                </div>
+                <div class="form-group">
+                  <strong class="control-label col-md-3 col-sm-3 col-xs-12">Confirm Password:
+                  </strong>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="password" [(ngModel)]="user.newConfirmPassword" name="newConfirmPassword" class="form-control col-md-7 col-xs-12" [formControl]="complexForm1.controls['newConfirmPassword']" placeholder="Confirm Password">
+                    <div *ngIf="complexForm1.controls.newConfirmPassword.touched && complexForm1.hasError('matchingPasswords')">{{constants.PASSWORD_MISMATCH}}</div>
+                    <!-- <div *ngIf="complexForm1.controls['confirmPassword'].hasError('minlength') && complexForm1.controls['confirmPassword'].touched" class="alert alert-danger">{{constants.PASSWORD_MIN_LENGTH}}</div>
+                    <div *ngIf="complexForm1.controls['confirmPassword'].hasError('maxlength') && complexForm1.controls['confirmPassword'].touched" class="alert alert-danger">{{constants.PASSWORD_MAX_LENGTH}}</div> -->
+                  </div>
+                </div>
+                <div class="form-group" *ngIf="user.status">
+                  <strong class="control-label col-md-3 col-sm-3 col-xs-12">Status:
+                  </strong>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <select [(ngModel)]="user.status" name="status" class="form-control col-md-7 col-xs-12" [formControl]="complexForm1.controls['status']">
+                      <option value="ACTIVE" *ngIf="user.status != 'REVIEW'">Active</option>
+                      <option value="INACTIVE" *ngIf="user.status != 'REVIEW'">Inactive</option>
+                      <option value="REVIEW" *ngIf="user.status =='REVIEW'">Review</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                   <input [disabled]="!complexForm1.valid" type="submit" value="Submit" class="btn btn-success"> 
+                  <button routerLink="/users" class="btn btn-default">Cancel</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>

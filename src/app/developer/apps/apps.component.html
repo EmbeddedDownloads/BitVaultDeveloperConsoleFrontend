@@ -1,0 +1,108 @@
+<!-- page content -->
+<div class="right_col" role="main">
+  <div class="mainwrap">
+    <div class="allapp">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>All Applications</h2>                            
+              <ul class="nav navbar-right panel_toolbox">
+                <button type="button" class="btn btn-success pull-right" routerLink="/dashboard/upload-app" (click)="clearStorge()">Create Application</button>
+              </ul>
+              <input type="text" class="searchBox" name="search" [(ngModel)]="searchString" (ngModelChange)="appListing(1)" placeholder="Type at least 2 characters">  
+              <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+              <div class="table-responsive">
+                <table class="table table-bordered table-striped jambo_table bulk_action">
+                  <thead>
+                    <tr class="headings">
+                      <th class="column-title">App Title </th>
+                      <th class="column-title">App Name </th>
+                      <th class="column-title">Price </th>
+                      <th class="column-title">Active/Total Installs </th>
+                      <th class="column-title">Avg. Rating/Total </th>
+                      <th class="column-title">Last Updated </th>
+                      <th class="column-title no-link last"><span class="nobr">Status</span>
+                      </th>
+                      <th class="column-title">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor='let app of appList'>
+                      <td>
+                        <a routerLink="/appsdashboard/upload-app/{{app.appApplicationId}}/{{app.latestVersionName}}">
+                            <span class="appicon">
+                                <img *ngIf="app.appIconUrl" src="{{app.appIconUrl}}" alt="{{app.title}}" class="img-circle profile_img">
+                                <img *ngIf="!app.appIconUrl" src="assets/images/no-icon.png" alt="..." class="img-circle profile_img">
+                            </span> {{app.title}}
+                        </a> 
+                      </td>
+                      <td> {{app.appName}}</td>
+                      <td> {{app.appPrice}}</td>
+                      <td>0/0</td>
+                      <td>{{app.averageRating}}</td>
+                      <td class="a-right a-right ">{{app.updatedAt | date: 'mediumDate'}}</td>
+                      <td class="project_progress">
+                        <span class="btn-success btn-xs capitalize">{{app.status | lowercase}}</span>
+                      </td>
+                      <td><a routerLink="/app-history/{{app.appApplicationId}}" class="btn btn-fill btn-info"><span class="glyphicon glyphicon-edit"></span> History</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <p class="no-result-found" *ngIf="show==false">{{constants.NO_RECORD_FOUND}}</p>
+                <ul *ngIf="pager.pages && pager.pages.length && show==true" class="pagination">
+                <li *ngIf="pager.currentPage != 1" [ngClass]="{disabled:pager.currentPage === 1}">
+                    <a (click)="appListing(1)">First</a>
+                </li>
+                <li *ngIf="pager.currentPage === 1" [ngClass]="{disabled:pager.currentPage === 1}">
+                    <a>First</a>
+                </li>
+                <li *ngIf="pager.currentPage != 1" [ngClass]="{disabled:pager.currentPage === 1}">
+                    <a (click)="appListing(pager.currentPage - 1)">Previous</a>
+                </li>
+                <li *ngIf="pager.currentPage === 1" [ngClass]="{disabled:pager.currentPage === 1}">
+                    <a>Previous</a>
+                </li>
+                <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                    <a (click)="appListing(page)">{{page}}</a>
+                </li>
+                <li *ngIf="pager.currentPage != pager.totalPages" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                    <a (click)="appListing(pager.currentPage + 1)">Next</a>
+                </li>
+                <li *ngIf="pager.currentPage === pager.totalPages" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                    <a>Next</a>
+                </li>
+                <li *ngIf="pager.currentPage != pager.totalPages" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                    <a (click)="appListing(pager.totalPages)">Last</a>
+                </li>
+                <li *ngIf="pager.currentPage === pager.totalPages" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                    <a>Last</a>
+                </li>
+            </ul>
+
+
+
+
+
+
+
+
+                <!--  <div class="paginattion" *ngIf="show==true">
+                    <pagination-controls 
+                    (pageChange) = "page = appListing($event)" 
+                    id="1"
+                    maxSize = "10"
+                    directionLinks = "true"
+                    autohide = "true">
+                    </pagination-controls>                    
+                 </div>
+                <p class="no-result-found" *ngIf="show==false">{{constants.NO_RECORD_FOUND}}</p> -->
+              </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>

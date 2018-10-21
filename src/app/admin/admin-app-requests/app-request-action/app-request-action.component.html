@@ -1,0 +1,192 @@
+<div class="nav-md">
+  <div class="container body">
+    <div class="main_container">
+      <!-- sidebar menu -->
+    <app-adminmenudashboard></app-adminmenudashboard>
+    <!-- /sidebar menu -->
+    <!-- top navigation -->
+  <app-adminheader></app-adminheader>
+  <!-- /top navigation -->
+  <div class="right_col" role="main">
+    <div class="mainwrap">
+      <div class="allapp">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2 class="pull-left">Manage Application Activation Request: {{model.appDetail.application.title}}</h2>
+              <div class="pull-right" style="white-space: nowrap;">
+                <!-- <strong class="col-md-6">BVK URL:</strong> -->
+                <span class="col-md-6"><a href="{{model.appDetail.application.apkUrl}}" target="_blank"><i class="fa fa-download fa-2x" aria-hidden="true"></i> Download BVK</a></span>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content wbreak">
+              <br>
+              <form  #addUserDetails = "ngForm" data-parsley-validate="" class="form-horizontal form-label-left">
+                <div class="row">
+                  <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                      <strong class="col-md-6 formlables">App Title:</strong>
+                      <span class="col-md-6">{{model.appDetail.application.title}}</span>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                      <strong class="col-md-6 formlables">App Price:</strong>
+                      <span class="col-md-6">${{model.appDetail.application.appPrice}}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                      <strong class="col-md-6 formlables">App Type:</strong>
+                      <span class="col-md-6">{{model.appDetail.application.applicationType.appTypeName}}</span>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                      <strong class="col-md-6  formlables">Average Rating:</strong>
+                      <span class="col-md-6">{{model.appDetail.application.averageRating}}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                      <strong class="col-md-6 formlables">Developer Email:</strong>
+                      <span class="col-md-6">{{model.appDetail.application.email}}</span>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                      <strong class="col-md-6 formlables">Language:</strong>
+                      <span class="col-md-6">{{model.appDetail.application.language}}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                      <strong class="col-md-6 formlables">Latest Version Name:</strong>
+                      <span class="col-md-6">{{model.appDetail.application.latestVersionName}}</span>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                      <strong class="col-md-6 formlables">Latest Version No:</strong>
+                      <span class="col-md-6">{{model.appDetail.application.latestVersionNo}}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                      <strong class="col-md-6 formlables">Package Name:</strong>
+                      <span class="col-md-6">{{model.appDetail.application.packageName}}</span>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                      <strong class="col-md-6 formlables">Privacy Policy:</strong>
+                      <span class="col-md-6"><a href="{{model.appDetail.application.privacyPolicyUrl}}" target="_blank" class="ellips">Click Here</a></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                      <strong class="col-md-6 formlables">Updated Type:</strong>
+                      <span class="col-md-6">{{model.appDetail.application.updateType}}</span>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                      <strong class="col-md-6 formlables">Website:</strong>
+                      <span class="col-md-6">{{model.appDetail.application.website}}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                      <strong class="col-md-6 formlables">Requesting For:</strong>
+                      <span class="col-md-6">{{model.requestFor}}</span>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                      <strong class="col-md-6 formlables">Created At:</strong>
+                      <span class="col-md-6">{{model.appDetail.application.createdAt | date: 'mediumDate'}}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                      <strong class="col-md-6 formlables">Last Updated At:</strong>
+                      <span class="col-md-6">{{model.appDetail.application.updatedAt | date: 'mediumDate'}}</span>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                      <strong class="col-md-6 formlables">App Icon URL:</strong>
+                      <span class="col-md-6"><a href="{{model.appDetail.appIconUrl}}" target="_blank" class="ellips">Click Here</a></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                      <strong class="col-md-6 formlables">Category Name:</strong>
+                      <span class="col-md-6">{{model.appDetail.application.appCategory.categoryType}}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <strong class="control-label col-md-3 col-sm-3 col-xs-12 formlables">Change Status To:
+                  </strong>
+                  <div class="col-md-4 col-sm-4 col-xs-12">
+                    <select [(ngModel)]="model.status" name="status"  class="form-control col-md-7 col-xs-12" (change)="changedValue(model.status)">
+                      <option value="PENDING" *ngIf="model.status == 'PENDING'">Pending</option>
+                      <option value="APPROVED">Approve</option>
+                      <option value="REJECTED">Reject</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group" [formGroup]="complexForm" *ngIf = "model.status == 'REJECTED'">
+                  <strong class="control-label col-md-3 col-sm-3 col-xs-12 formlables">Rejection Reason:
+                  </strong>
+                  <div class="col-md-4 col-sm-4 col-xs-12">
+                    <select [(ngModel)]="model.temp_status" name="temp_status" [formControl]="complexForm.controls['temp_status']"  class="form-control col-md-7 col-xs-12">
+                      <option value="undefined"  [selected]="model.temp_status === 'undefined'">--Select Reason--</option>
+                      <option *ngFor="let temp of rejectionTemplte" [ngValue]="temp.key" >{{temp.value}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group" *ngIf = "model.temp_status == 'others' && model.status == 'REJECTED'">
+                  <strong class="control-label col-md-3 col-sm-3 col-xs-12 formlables">Rejection Reason Others:
+                  </strong>
+                  
+                  <div class="col-md-4 col-sm-4 col-xs-12">
+                    
+                    <input type="text" [(ngModel)]="model.reason" name="reason" class="form-control col-md-7 col-xs-12" required>
+                  </div>
+                </div>
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                    <input [disabled]="model.status == 'PENDING'" (click)="accAprovalRejection(model.reqId, model.status, model.reason)" type="submit" class="btn btn-success" value="Submit">
+                    <button (click)="backClicked()" type="submit" class="btn btn-default">Cancel</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>

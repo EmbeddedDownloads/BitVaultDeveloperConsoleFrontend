@@ -1,0 +1,32 @@
+<div class="col-md-3 left_col" id="toggle_menu">
+  <div class="left_col scroll-view">
+    <div class="clearfix"></div>
+    <!-- menu profile quick info -->
+    <div class="profile clearfix">
+      <div class="profile_pic">
+        <img *ngIf="!avatar" src="assets/images/user.png" class="img-circle profile_img">
+        <img *ngIf="avatar" src="{{avatar}}" class="img-circle profile_img">
+      </div>
+      <div class="profile_info"><span>Welcome,</span><h2>{{avatarName}}</h2></div>
+    </div><br/>
+    <!-- sidebar menu -->
+    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+      <div class="menu_section">
+        <ul class="nav side-menu">
+          <li><a [routerLinkActive]="['active']" routerLink="/dashboard">All Applications</a></li>
+          <li *ngIf="loginType=='ROLE_ORGANIZATION'"><a [routerLinkActive]="['active']" routerLink="/users">Organization Users</a></li>
+          <li><a [routerLinkActive]="['active']" routerLink="/addon-services">Addon Services</a></li>
+          <li><a (click)="downloadBvkfile()">Download BVK Key file</a></li>
+          <li><a [routerLinkActive]="['active']" routerLink="/my-transactions">Transactions List</a></li>
+          <li><a [routerLinkActive]="['active']" routerLink="/my-requests">All Requests</a></li>
+          <li><a [routerLinkActive]="['active']" routerLink="/audit-trail">Audit Trail</a></li>
+          <li><a>Order Management</a></li>
+          <li><a>Reports</a></li>
+          <li><a>Settings</a></li>
+          <li><a>Alerts</a></li>          
+        </ul>
+      </div>
+    </div>
+    <!-- /sidebar menu -->
+  </div>
+</div>   

@@ -1,0 +1,121 @@
+<div class="nav-md">
+  <div class="container body">
+    <div class="main_container">
+      <!-- sidebar menu -->
+    <app-apps-menu-dashboard></app-apps-menu-dashboard>
+    <!-- /sidebar menu -->
+    <!-- top navigation -->
+  <app-adminheader></app-adminheader>
+  <!-- /top navigation -->
+  <!-- page content -->
+  <div class="right_col" role="main">
+    <div class="mainwrap">
+      <div class="allapp">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="row">
+            <!--  App Release Production -->
+            <div class="widgets-block">
+              <div class="title-block">
+                <h3>{{title}}</h3>
+              </div>
+              <h4>App Release Production</h4>
+              <div class="widgets-row" *ngIf="!msg1">
+                <div class="release-col">
+                  <span class="appicon">
+                    <img src="{{productionArtifact.appIconUrl}}" alt="..." class="img-circle profile_img">
+                  </span>
+                  <div class="release-detail-col">
+                    <h5>Release: {{productionArtifact.appVersionName}}</h5>
+                    <span>{{productionArtifact.createdAt | date:'medium'}}</span>
+                  </div>
+                </div>
+                <div class="virsion-col">BVK version code: <strong>{{productionArtifact.appVersionNo}}</strong></div>
+              </div>
+              <div class="widgets-row" *ngIf="msg1">
+                <p>No current version is available! </p>
+              </div>
+              <!--  App Pending Artifact -->
+              <h4>Pending Artifact(s)</h4>
+              <div *ngIf="!msg3">
+                <div class="widgets-row">
+                  <div class="table-responsive pagination-data">
+                    <table class="table table-bordered table-striped projects">
+                      <thead>
+                        <tr>
+                          <th>Version Name</th>
+                          <th>Version Code</th>
+                          <th>Download</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let draft of draftPendingArtifact">
+                          <td>{{draft.appVersionName}}</td>
+                          <td>{{draft.appVersionNo}}</td>
+                          <td><span><a href="{{draft.apkUrl}}" target="_blank"><i class="fa fa-download fa-2x" aria-hidden="true"></i></a></span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="widgets-row" *ngIf="msg3">
+              <p>No pending artifact(s) found! </p>
+            </div>
+            <!--  Unpublished Artifact -->
+            <h4>Unpublished Artifact(s)</h4>
+            <div *ngIf="!msg2">
+              <div class="widgets-row">
+                <div class="table-responsive pagination-data">
+                  <table class="table table-bordered table-striped projects">
+                    <thead>
+                      <tr>
+                        <th>Version Name</th>
+                        <th>Version Code</th>
+                        <th>Download</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let un of unpublishedArtifact">
+                        <td>{{un.appVersionName}}</td>
+                        <td>{{un.appVersionNo}}</td>
+                        <td><span><a href="{{un.apkUrl}}" target="_blank"><i class="fa fa-download fa-2x" aria-hidden="true"></i></a></span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="widgets-row" *ngIf="msg2">
+            <p>No unpublished artifact(s) found! </p>
+          </div>
+          <!--  Rejected Artifact -->
+          <h4>Rejected Artifact(s)</h4>
+          <div *ngIf="!msg4">
+            <div class="widgets-row" *ngFor="let reject of rejectedArtifact">
+              <div class="release-col">
+                <span class="appicon">
+                  <img src="assets/images/call.png" alt="..." class="img-circle profile_img">
+                </span>
+                <div class="release-detail-col">
+                  <h5>Release: {{reject.appVersionName}}</h5>
+                  <span>{{reject.createdAt | date:'medium'}}</span>
+                </div>
+              </div>
+              <div class="virsion-col">BVK version code: <strong>{{reject.appVersionNo}}</strong></div>
+            </div>
+          </div>
+          <div class="widgets-row" *ngIf="msg4">
+            <p>No rejected artifact(s) found! </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<app-adminfooter></app-adminfooter>
+</div>
+</div>
+</div>

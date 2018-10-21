@@ -1,0 +1,26 @@
+<div class="col-md-3 left_col" id="toggle_menu">
+	<div class="left_col scroll-view">
+		<div class="clearfix"></div>
+		<!-- menu profile quick info -->
+		<div class="profile clearfix">
+			<div class="profile_pic">
+				<img *ngIf="!avatar" src="assets/images/user.png" class="img-circle profile_img">
+				<img *ngIf="avatar" src="{{avatar}}" class="img-circle profile_img">
+			</div>
+			<div class="profile_info"><span>Welcome,</span><h2>{{avatarName}}</h2></div>
+		</div>
+		<br />
+		<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+			<div class="menu_section">
+				<ul class="nav side-menu">
+					<li><a [routerLinkActive]="['active']" class="custom-brd-tpbt" routerLink="/dashboard"> <i class="fa fa-arrow-left" aria-hidden="true"></i> All Application</a></li>
+					<li><a [routerLinkActive]="['active']" routerLink="/appsdashboard/upload-app">Application</a></li>
+					<li><a [routerLinkActive]="['active']" routerLink="/developer/app/dashboard">Application Dashboard</a></li>
+					<li><a [routerLinkActive]="['active']" routerLink="/developer/app/statistics">Statistics</a></li>
+					<li><a [routerLinkActive]="['active']" routerLink="/developer/app/ratingreview">Ratings & Review</a></li>
+					<li><a [routerLinkActive]="['active']" routerLink="/developer/app/releasemanagement">Release Management</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

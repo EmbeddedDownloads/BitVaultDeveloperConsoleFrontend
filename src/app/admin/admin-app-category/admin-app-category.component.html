@@ -1,0 +1,68 @@
+<div class="nav-md">
+  <div class="container body">
+    <div class="main_container">
+      <!-- sidebar menu -->
+    <app-adminmenudashboard></app-adminmenudashboard>
+    <!-- /sidebar menu -->
+    <!-- top navigation -->
+  <app-adminheader></app-adminheader>
+  <!-- /top navigation -->
+  <div class="right_col" role="main">
+    <div class="mainwrap">
+      <div class="allapp">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>Manage Category</h2>
+              <div class="pull-right">
+                <a routerLink="/app-category/add-app-category"  class="btn btn-warning">Add New Category</a>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <!-- start project list -->
+              <div class="table-responsive">
+                <table class="table table-bordered table-striped projects">
+                  <thead>
+                    <tr>
+                      <th>Category Type</th>
+                      <th>Category Count</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor='let cat of catList'>
+                      <td>
+                        <span class="appicon" *ngIf="!cat.categoryIconUrl">
+                          <img src="assets/images/category.jpg" alt="..." class="img-circle profile_img">
+                        </span>
+                        <span class="appicon" *ngIf="cat.categoryIconUrl">
+                          <img src="{{cat.categoryIconUrl}}" alt="..." class="img-circle profile_img">
+                        </span>
+                        {{cat.categoryType}}
+                      </td>
+                       <td>
+                        {{cat.categoryCount}}
+                      </td>
+                      <td><span class="btn-success btn-xs capitalize">{{cat.status | lowercase}}</span></td>
+                      <td>
+                        <a routerLink="/app-category/edit-app-category/{{cat.appCategoryId}}"  class="btn btn-fill btn-info ">
+                          <span class="glyphicon glyphicon-edit"></span> View
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- end project list -->
+                <p class="no-result-found" *ngIf="showCategoryMessage==true">{{constants.NO_RECORD_FOUND}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
